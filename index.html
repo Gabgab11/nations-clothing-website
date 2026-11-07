@@ -161,6 +161,18 @@ header{position:sticky;top:0;z-index:40;background:#fff;padding:calc(12*var(--u)
 .quick{display:none}
 .none{grid-column:1/-1;padding:60px 0;text-align:center;color:var(--mid)}
 
+/* lookbook */
+.look2 .top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px 40px;margin-bottom:calc(30*var(--u))}
+.look2 .lead{color:var(--mid);max-width:44ch}
+.lbgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:calc(18*var(--u))}
+.lbgrid figure{margin:0;overflow:hidden;background:#eef3f8}.lbgrid img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.lbgrid figure:hover img{transform:scale(1.03)}
+.cols{display:flex;flex-wrap:wrap;gap:6px}
+.cols button{height:36px;padding:0 12px;font:500 13px var(--text);box-shadow:inset 0 0 0 1px var(--line)}
+.cols button[aria-pressed=true]{background:var(--ink);color:#fff}
+.side .for{font-size:13.5px;color:var(--mid)}.side .note{font-size:13.5px;color:var(--brown)}
+.sizes{grid-template-columns:repeat(auto-fill,minmax(38px,1fr))!important}
+
 /* the house */
 .house{background:var(--haze);display:grid;grid-template-columns:5fr 7fr;gap:calc(70*var(--u));align-items:start}
 .house svg.mark{width:min(100%,300px);height:auto;display:block}.house svg.mark path{fill:var(--brown)}
@@ -232,7 +244,7 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
 @media (hover:none){.sizes{display:none}.quick{display:block;position:absolute;right:8px;bottom:8px;width:36px;height:36px;background:#fff;z-index:3;border-radius:50%}
   .quick:before,.quick:after{content:"";position:absolute;left:11px;right:11px;top:50%;height:1.5px;margin-top:-.75px;background:var(--ink)}.quick:after{transform:rotate(90deg)}
   .tile:hover .det{opacity:0}}
-@media (max-width:1100px){.tabs{gap:22px}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:1100px){.lbgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.tabs{gap:22px}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:820px){
   :root{--u:1px;--step:46vh;--gut:max(16px,env(safe-area-inset-left,0px))}
   header{padding:8px var(--gut)}
@@ -282,7 +294,7 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
       <div class="line" id="line"></div>
       <div class="intro">
         <h1 class="wide">Our New Look</h1>
-        <p>Unisex clothing, made in Nigeria and shipped worldwide. Two sets lead the season: The Monarch and The Regent. Drag or scroll to walk the line.</p>
+        <p>Unisex clothing, made in Nigeria and shipped worldwide. Six looks from the new collection. Drag or scroll to walk the line.</p>
       </div>
       <div class="tag">
         <div class="look wide"><span>Look</span><span class="win"><span class="roll" id="roll"></span></span></div>
@@ -305,16 +317,16 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
   </div>
   <div class="drops">
     <article class="drop">
-      <button class="frame" data-open="regent-onyx" aria-label="View The Regent Set"><img loading="lazy" data-a="hero-regent" alt="Model in the black Regent Set, standing in profile against a blue floral backdrop"><span class="badge wide">New</span></button>
+      <button class="frame" data-open="regent" aria-label="View The Regent Set"><img loading="lazy" data-a="hero-regent" alt="Model in the black Regent Set, standing in profile against a blue floral backdrop"><span class="badge wide">New</span></button>
       <div class="dropinfo"><h3 class="wide">The Regent Set</h3><div class="price" data-price="regent"></div>
         <p>A relaxed, flowing silhouette in premium textured fabric, refined with worked panels at the sleeve and pocket.</p>
-        <div class="acts"><button class="btn light" data-add="regent-onyx">Add to cart</button><button class="btn ghost" data-open="regent-onyx">View the set</button></div></div>
+        <div class="acts"><button class="btn light" data-add="regent">Add to cart</button><button class="btn ghost" data-open="regent">View the set</button></div></div>
     </article>
     <article class="drop">
-      <button class="frame" data-open="monarch-sky" aria-label="View The Monarch Set"><img loading="lazy" data-a="hero-monarch" alt="Model in the sky blue Monarch Set, seated in a burgundy leather chair"><span class="badge wide">New</span></button>
+      <button class="frame" data-open="monarch" aria-label="View The Monarch Set"><img loading="lazy" data-a="hero-monarch" alt="Model in the sky blue Monarch Set, seated in a burgundy leather chair"><span class="badge wide">New</span></button>
       <div class="dropinfo"><h3 class="wide">The Monarch Set</h3><div class="price" data-price="monarch"></div>
         <p>For the kings who love to look good without doing too much.</p>
-        <div class="acts"><button class="btn light" data-add="monarch-sky">Add to cart</button><button class="btn ghost" data-open="monarch-sky">View the set</button></div></div>
+        <div class="acts"><button class="btn light" data-add="monarch">Add to cart</button><button class="btn ghost" data-open="monarch">View the set</button></div></div>
     </article>
   </div>
 </section>
@@ -327,7 +339,7 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
   <div class="wcopy">
     <div class="eyebrow wide">Women</div>
     <h2 class="h2 wide">For the Queens</h2>
-    <p class="lead">Full, flowing bubu gowns in textured metallic fabric, with gathered puff sleeves and a sheer hem.</p>
+    <p class="lead">Statement pieces for Queens who love to stand out: bubu, dresses and sets in rich, vibrant colour, sized 4 to 22.</p>
     <div class="wcards" id="wcards"></div>
   </div>
 </section>
@@ -336,10 +348,21 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
   <div class="top"><div><div class="eyebrow wide">The full line</div><h2 class="h2 wide">Catalogue</h2></div></div>
   <div class="filters">
     <div class="chips" id="sets" role="group" aria-label="Filter by set"></div>
-    <div class="swatches" id="colours" role="group" aria-label="Filter by colour"></div>
+    
     <div class="count" id="shown" aria-live="polite"></div>
   </div>
   <div class="grid" id="grid"></div>
+</section>
+
+<section class="sec look2" id="lookbook">
+  <div class="top"><div><div class="eyebrow wide">From the shoot</div><h2 class="h2 wide">More looks</h2></div>
+  <p class="lead">These pieces are from the same shoot. Ask us on WhatsApp for prices and sizes.</p></div>
+  <div class="lbgrid">
+    <figure><img data-a="lb-group" loading="lazy" alt="Two men and two women from the new collection holding Nations Clothing bags"></figure>
+    <figure><img data-a="lb-lilac" loading="lazy" alt="Lilac set with a purple lace panel"></figure>
+    <figure><img data-a="lb-cage" loading="lazy" alt="Black and olive tops with lattice sleeves"></figure>
+    <figure><img data-a="lb-redpink" loading="lazy" alt="Red set and pink set with cord detail"></figure>
+  </div>
 </section>
 
 <section class="sec house" id="house">
@@ -366,30 +389,44 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
 <div class="wait" id="wait"></div>
 
 <script>
-const A={"blossom": "img/blossom.webp", "d-monarch-clay": "img/d-monarch-clay.webp", "d-monarch-ink": "img/d-monarch-ink.webp", "d-monarch-ivory": "img/d-monarch-ivory.webp", "d-monarch-sage": "img/d-monarch-sage.webp", "d-monarch-sky": "img/d-monarch-sky.webp", "d-monarch-wine": "img/d-monarch-wine.webp", "d-regent-bottle": "img/d-regent-bottle.webp", "d-regent-midnight": "img/d-regent-midnight.webp", "d-regent-onyx": "img/d-regent-onyx.webp", "d-regent-oxblood": "img/d-regent-oxblood.webp", "d-regent-stone": "img/d-regent-stone.webp", "d-regent-umber": "img/d-regent-umber.webp", "d-women-emerald": "img/d-women-emerald.webp", "d-women-sapphire": "img/d-women-sapphire.webp", "hero-monarch": "img/hero-monarch.webp", "hero-regent": "img/hero-regent.webp", "monarch-clay": "img/monarch-clay.webp", "monarch-ink": "img/monarch-ink.webp", "monarch-ivory": "img/monarch-ivory.webp", "monarch-sage": "img/monarch-sage.webp", "monarch-sky": "img/monarch-sky.webp", "monarch-wine": "img/monarch-wine.webp", "regent-bottle": "img/regent-bottle.webp", "regent-midnight": "img/regent-midnight.webp", "regent-onyx": "img/regent-onyx.webp", "regent-oxblood": "img/regent-oxblood.webp", "regent-stone": "img/regent-stone.webp", "regent-umber": "img/regent-umber.webp", "women-emerald": "img/women-emerald.webp", "women-poster": "img/women-poster.webp", "women-sapphire": "img/women-sapphire.webp"};
-const META={"monarch-sky": [1102, 1200], "monarch-sage": [1102, 1200], "monarch-clay": [1102, 1200], "monarch-ivory": [1102, 1200], "monarch-wine": [1102, 1200], "monarch-ink": [1102, 1200], "regent-onyx": [506, 1300], "regent-midnight": [506, 1300], "regent-umber": [506, 1300], "regent-bottle": [506, 1300], "regent-oxblood": [506, 1300], "regent-stone": [506, 1300]};
-const SETS={
-  monarch:{name:'The Monarch Set',price:95000,k:.8,short:'Monarch',
-    text:'For the kings who love to look good without doing too much. A tunic and trouser set with a contrast collar and a single piped pocket.'},
-  women:{name:'Bubu Gown',price:120000,k:1,short:'Women',
-    text:'A full, flowing bubu gown in textured metallic fabric, with gathered puff sleeves and a sheer hem. Wear it with a gele for occasions.'},
-  regent:{name:'The Regent Set',price:135000,k:1,short:'Regent',
-    text:'A relaxed, flowing silhouette in premium textured fabric, refined with worked panels at the sleeve and pocket.'}};
-const COL={sky:['Sky','#93cdee'],sage:['Sage','#8fa78c'],clay:['Clay','#b58a68'],ivory:['Ivory','#ece4d3'],wine:['Wine','#6e2a38'],ink:['Ink','#2b3550'],
-  onyx:['Onyx','#16171b'],midnight:['Midnight','#27375f'],umber:['Umber','#70462b'],bottle:['Bottle','#27473b'],oxblood:['Oxblood','#5c1f28'],stone:['Stone','#a59a8b'],emerald:['Emerald','#11823f'],sapphire:['Sapphire','#1d4a73']};
-const REAL=['monarch-sky','regent-onyx','women-emerald','women-sapphire'];
+const A={"blossom": "img/blossom.webp", "dt-bloom": "img/dt-bloom.webp", "dt-doxa": "img/dt-doxa.webp", "dt-esther": "img/dt-esther.webp", "dt-monarch": "img/dt-monarch.webp", "dt-palette": "img/dt-palette.webp", "dt-regent": "img/dt-regent.webp", "dt-sterling": "img/dt-sterling.webp", "dt-wave": "img/dt-wave.webp", "hero-monarch": "img/hero-monarch.webp", "hero-regent": "img/hero-regent.webp", "lb-cage": "img/lb-cage.webp", "lb-group": "img/lb-group.webp", "lb-lilac": "img/lb-lilac.webp", "lb-redpink": "img/lb-redpink.webp", "look-bloom": "img/look-bloom.webp", "look-doxa": "img/look-doxa.webp", "look-monarch": "img/look-monarch.webp", "look-palette": "img/look-palette.webp", "look-regent": "img/look-regent.webp", "look-sterling": "img/look-sterling.webp", "ph-bloom": "img/ph-bloom.webp", "ph-doxa": "img/ph-doxa.webp", "ph-esther": "img/ph-esther.webp", "ph-monarch": "img/ph-monarch.webp", "ph-palette": "img/ph-palette.webp", "ph-regent": "img/ph-regent.webp", "ph-sterling": "img/ph-sterling.webp", "ph-wave": "img/ph-wave.webp", "women-poster": "img/women-poster.webp"};
+const META={"look-bloom": [475, 1300], "look-sterling": [484, 1300], "look-palette": [775, 1300], "look-doxa": [730, 1200], "look-regent": [506, 1300], "look-monarch": [1102, 1200]};
 const small=Math.min(screen.width,innerWidth)<=820;
 const pic=k=>small&&A[k].slice(0,4)==='img/'?A[k].replace('img/','img/s/'):A[k];
-const P={};['regent-onyx','monarch-sky','regent-umber','monarch-sage','regent-midnight','monarch-ivory','regent-bottle','monarch-clay','regent-oxblood','monarch-wine','regent-stone','monarch-ink'].forEach(id=>{
-  const [set,col]=id.split('-');P[id]={id,set,col,name:SETS[set].name,colour:COL[col][0],hex:COL[col][1],price:SETS[set].price,img:pic(id),det:pic('d-'+id)}});
-const LOOKS=Object.values(P).slice(0,6);
-const WOMEN=[['women-emerald','The Emerald Bubu'],['women-sapphire','The Sapphire Bubu']].map(([id,name])=>{const col=id.split('-')[1];return P[id]={id,set:'women',col,name,colour:COL[col][0],hex:COL[col][1],price:SETS.women.price,img:pic(id),det:pic('d-'+id),photo:true}});
-const ALL=[...WOMEN,...LOOKS,...Object.values(P).filter(x=>x.set!=='women'&&!LOOKS.includes(x))],SIZES=['S','M','L','XL','XXL'];
+const NUM=(a,b)=>{const o=[];for(let n=a;n<=b;n+=2)o.push(String(n));return o};
+const PRODUCTS=[
+ {id:'regent',name:'The Regent Set',g:'men',price:60000,sizes:['M','L','XL'],colours:['Black'],k:1,
+  text:'A relaxed, flowing silhouette in premium textured fabric, refined with contrast patterned details on the sleeves and pocket. Effortless in style, for both formal and celebratory occasions.'},
+ {id:'bloom',name:'The Bloom Dress',g:'women',price:55000,big:58000,sizes:[...NUM(4,18),'20+'],colours:['Orange / cream','Red / cream','Baby pink / deep pink','Black / white','Olive green / yellow','Blue / sky blue'],k:1,
+  text:'Designed for Queens who love to stand out: a structured bodice, a voluminous flared skirt and dramatic ruffles around the neckline and shoulders, finished with delicate floral embellishments.',
+  for:'Birthdays, weddings, garden parties, bridal showers'},
+ {id:'monarch',name:'The Monarch Set',g:'men',price:55000,sizes:['M','L','XL'],colours:['Sky Blue','Black','White'],k:.8,
+  text:'For the Kings who love to look good without doing too much. A beautifully crafted native piece that brings together comfort, class and effortless style.',note:'Delivery in 3 to 7 working days.'},
+ {id:'sterling',name:'The Sterling Set',g:'men',price:55000,sizes:['S','M','L','XL','XXL'],colours:['Black','Brown','Wine','White','Navy Blue'],k:1,
+  text:'A structured short-sleeve shirt in warm tan with four contrasting chocolate cargo pockets, paired with tailored straight-leg trousers in rich chocolate brown.',
+  for:'Wedding receptions, birthdays, dinner dates, church'},
+ {id:'palette',name:'The Palette Set',g:'women',price:55000,big:60000,sizes:[...NUM(8,18),'20+'],colours:['Fuchsia Pink','Green','Blue'],k:1,
+  text:'An oversized two-piece set that blends comfort, elegance and effortless style.',for:'Casual outings, brunch dates, travel, relaxed gatherings'},
+ {id:'doxa',name:'The Doxa Bubu',g:'women',price:65000,big:73000,sizes:[...NUM(4,18),'20+'],colours:['Green','Blue','Brown','Silver','Red'],k:1,
+  text:'A blend of sophistication, comfort and timeless African elegance: rich, vibrant colour, a graceful silhouette and exquisite finishing, for Queens who love to make an effortless statement.',
+  for:'Weddings, church, birthdays, cultural events'},
+ {id:'esther',name:'The Esther Dress',g:'women',price:55000,sizes:NUM(4,22),colours:['Wine','Black','Brown','White','Navy Blue'],
+  text:'A flowing, relaxed silhouette with dramatic wide sleeves, an off-shoulder neckline finished with soft ruffles, and a contrasting ruffled hem.',
+  for:'Wedding receptions, birthdays, dinner dates, church'},
+ {id:'wave',name:'The Wave Cord Set',g:'women',price:60000,sizes:NUM(4,12),colours:['Green','Blue','Silver','Brown'],
+  text:'A bold blend of colour, creativity and comfort: a wave-inspired design in beautiful cord texture with a relaxed silhouette.',
+  for:'Casual outings, brunch dates, creative events'}];
+const P={};PRODUCTS.forEach(x=>{x.img=pic('ph-'+x.id);x.det=pic('dt-'+x.id);x.cut=x.k?pic('look-'+x.id):null;x.colour=x.colours[0];P[x.id]=x});
+const LOOKS=['regent','bloom','monarch','sterling','palette','doxa'].map(id=>P[id]);
+const WOMEN=['doxa','bloom','esther','wave'].map(id=>P[id]);
+const ALL=['doxa','bloom','regent','esther','monarch','palette','sterling','wave'].map(id=>P[id]);
+const priceOf=(id,s)=>s==='20+'&&P[id].big?P[id].big:P[id].price;
+const defSize=x=>x.sizes[Math.min(2,x.sizes.length-1)];
 const naira=n=>'₦'+n.toLocaleString('en-NG');
 const $=id=>document.getElementById(id),calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const heart='<svg viewBox="0 0 24 24"><path d="M12 20S3.5 15 3.5 9A4.6 4.6 0 0 1 12 6.600 4.600 4.600 0 0 1 20.500 9C20.500 15 12 20 12 20Z"/></svg>';
 document.querySelectorAll('[data-a]').forEach(i=>i.src=pic(i.dataset.a));
-document.querySelectorAll('[data-price]').forEach(e=>e.textContent=naira(SETS[e.dataset.price].price));
+document.querySelectorAll('[data-price]').forEach(e=>e.textContent=naira(P[e.dataset.price].price));
 
 /* ---------- runway: everything is computed from p ---------- */
 const KX=[1.2,.744,.496,.346,.235,.15,.085],KF=[1.14,.89,.777,.704,.651,.616,.59],KH=[1.18,.832,.574,.436,.334,.258,.19],
@@ -400,16 +437,16 @@ const N=LOOKS.length,stage=$('stage'),rail=$('rail'),ring=$('ring'),roll=$('roll
 const wrap=(x,n)=>((x%n)+n)%n,clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
 const people=LOOKS.map((L,i)=>{
   const e=document.createElement('div');e.className='m';e.dataset.i=i;
-  const im=new Image;im.decoding='async';im.src=L.img;im.alt=L.name+' in '+L.colour;im.draggable=false;e.append(im);line.append(e);
-  const [w,h]=META[L.id];return{e,r:w/h,k:SETS[L.set].k,f:'',o:''};
+  const im=new Image;im.decoding='async';im.src=L.cut;im.alt=L.name;im.draggable=false;e.append(im);line.append(e);
+  const [w,h]=META['look-'+L.id];return{e,r:w/h,k:L.k,f:'',o:''};
 });
 const cards=LOOKS.map((L,i)=>{
   const e=document.createElement('article');e.className='card'+(i%2?' alt':'');e.dataset.open=L.id;
-  e.innerHTML=`<button class="fav" data-fav="${L.id}" aria-pressed="false" aria-label="Save ${L.name} in ${L.colour}">${heart}</button><span class="shot"><img src="${L.img}" alt="" draggable="false"></span><div class="meta"><h3 class="wide">${L.name.replace('The ','')}<br>${L.colour}</h3><span>${naira(L.price)}</span><button class="add" data-add="${L.id}" aria-label="Add ${L.name} in ${L.colour} to cart"></button></div>`;
+  e.innerHTML=`<button class="fav" data-fav="${L.id}" aria-pressed="false" aria-label="Save ${L.name}">${heart}</button><span class="shot"><img src="${L.cut}" alt="" draggable="false"></span><div class="meta"><h3 class="wide">${L.name.replace('The ','')}<br>Sizes ${L.sizes[0]}–${L.sizes[L.sizes.length-1]}</h3><span>${naira(L.price)}</span><button class="add" data-open="${L.id}" aria-label="Choose a size for ${L.name}"></button></div>`;
   rail.append(e);return e;
 });
 for(let i=0;i<=N;i++){const b=document.createElement('b');b.textContent='0'+(i%N+1);roll.append(b);
-  const s=document.createElement('span');s.textContent=`${LOOKS[i%N].name.replace('The ','')} / ${LOOKS[i%N].colour}`;roll2.append(s)}
+  const s=document.createElement('span');s.textContent=LOOKS[i%N].name.replace('The ','');roll2.append(s)}
 
 let W=0,H=0,base=0,cardS=0,side=false,dirty=true,p=0,target=0,offset=0,scrollLooks=0,last=0,pinTop=0,pinLen=1;
 function size(){
@@ -504,39 +541,40 @@ function tabs(){
 }
 
 /* ---------- catalogue ---------- */
-let fSet='all',fCol=null;
+let fSet='all';
 const onlySaved={on:false};
 const saved=new Set(load('nc-saved',[]));
 function load(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}}
 function store(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-$('sets').innerHTML=[['all','All'],['women','Women'],['monarch','Monarch'],['regent','Regent']].map(([v,t])=>`<button class="chip" data-set="${v}" aria-pressed="${v==='all'}">${t}</button>`).join('');
-$('colours').innerHTML=[...new Set(ALL.map(x=>x.col))].map(c=>`<button class="sw" style="--c:${COL[c][1]}" data-col="${c}" aria-pressed="false" aria-label="${COL[c][0]}" title="${COL[c][0]}"></button>`).join('');
+$('sets').innerHTML=[['all','All'],['women','Women'],['men','Men']].map(([v,t])=>`<button class="chip" data-set="${v}" aria-pressed="${v==='all'}">${t}</button>`).join('');
+const range=x=>x.sizes.length>1?`Sizes ${x.sizes[0]} to ${x.sizes[x.sizes.length-1]}`:`Size ${x.sizes[0]}`;
 function grid(){
-  const list=ALL.filter(x=>(fSet==='all'||x.set===fSet)&&(!fCol||x.col===fCol)&&(!onlySaved.on||saved.has(x.id)));
+  const list=ALL.filter(x=>(fSet==='all'||x.g===fSet)&&(!onlySaved.on||saved.has(x.id)));
   $('shown').textContent=(onlySaved.on?'Saved: ':'')+list.length+(list.length===1?' piece':' pieces');
-  $('grid').innerHTML=list.map(x=>`<article class="tile"><div class="pic" data-open="${x.id}" role="button" tabindex="0" aria-label="View ${x.name} in ${x.colour}">
-    <img class="${x.photo?'cover':'main'}" src="${x.img}" alt="${x.name} in ${x.colour}" loading="lazy"><img class="det" src="${x.det}" alt="" loading="lazy">
-    <button class="fav" data-fav="${x.id}" aria-pressed="${saved.has(x.id)}" aria-label="Save ${x.name} in ${x.colour}">${heart}</button>
-    <div class="sizes" aria-label="Add in size">${SIZES.map(s=>`<button data-add="${x.id}" data-size="${s}" aria-label="Add size ${s}">${s}</button>`).join('')}</div>
+  $('grid').innerHTML=list.map(x=>`<article class="tile"><div class="pic" data-open="${x.id}" role="button" tabindex="0" aria-label="View ${x.name}">
+    <img class="cover" src="${x.img}" alt="${x.name}" loading="lazy"><img class="det" src="${x.det}" alt="" loading="lazy">
+    <button class="fav" data-fav="${x.id}" aria-pressed="${saved.has(x.id)}" aria-label="Save ${x.name}">${heart}</button>
+    <div class="sizes" aria-label="Add in size">${x.sizes.map(s=>`<button data-add="${x.id}" data-size="${s}" aria-label="Add size ${s}">${s}</button>`).join('')}</div>
     <button class="quick" data-open="${x.id}" aria-label="Choose a size"></button></div>
-    <div class="tinfo"><h3 class="wide">${x.name.replace('The ','')}</h3><div class="price">${naira(x.price)}</div><small style="--c:${x.hex}"><i></i>${x.colour}${REAL.includes(x.id)?'':' (preview)'}</small></div></article>`).join('')
-    ||`<div class="none">Nothing matches that filter yet. <button style="text-decoration:underline" data-reset>Clear filters</button></div>`;
+    <div class="tinfo"><h3 class="wide">${x.name.replace('The ','')}</h3><div class="price">${naira(x.price)}</div><small>${range(x)} · ${x.colours.length} colour${x.colours.length>1?'s':''}</small></div></article>`).join('')
+    ||`<div class="none">Nothing saved yet. <button style="text-decoration:underline" data-reset>Show everything</button></div>`;
   syncFav();
 }
 function syncFav(){document.querySelectorAll('[data-fav]').forEach(b=>b.setAttribute('aria-pressed',saved.has(b.dataset.fav)));$('saved').textContent=saved.size}
 
 /* ---------- cart ---------- */
-let cart=load('nc-cart',[]).filter(l=>P[l.id]);
-const count=()=>cart.reduce((n,l)=>n+l.q,0),total=()=>cart.reduce((n,l)=>n+l.q*P[l.id].price,0);
-function addItem(id,size='M',q=1,quiet){
-  const l=cart.find(x=>x.id===id&&x.s===size);if(l)l.q+=q;else cart.push({id,s:size,q});
+let cart=load('nc-cart2',[]).filter(l=>P[l.id]&&P[l.id].sizes.includes(l.s));
+const count=()=>cart.reduce((n,l)=>n+l.q,0),total=()=>cart.reduce((n,l)=>n+l.q*priceOf(l.id,l.s),0);
+function addItem(id,size,q=1,quiet,colour){
+  const x=P[id];size=size||defSize(x);colour=colour||x.colour;
+  const l=cart.find(o=>o.id===id&&o.s===size&&o.c===colour);if(l)l.q+=q;else cart.push({id,s:size,c:colour,q});
   saveCart();const b=$('cartBtn');b.classList.add('bump');setTimeout(()=>b.classList.remove('bump'),300);
-  if(!quiet)toast(`${P[id].name}, ${P[id].colour}, size ${size} added`);
+  if(!quiet)toast(`${x.name}, ${colour}, size ${size} added`);
 }
-function saveCart(){store('nc-cart',cart);$('count').textContent=count();if(overlay==='cart')drawCart()}
+function saveCart(){store('nc-cart2',cart);$('count').textContent=count();if(overlay==='cart')drawCart()}
 let stepOrder=false;
 function orderText(){
-  return 'Hello Nations Clothing, I would like to order:\n\n'+cart.map(l=>`${l.q} x ${P[l.id].name} (${P[l.id].colour}), size ${l.s}, ${naira(P[l.id].price*l.q)}`).join('\n')+`\n\nTotal: ${naira(total())}\nPlease confirm sizing and delivery.`;
+  return 'Hello Nations Clothing, I would like to order:\n\n'+cart.map(l=>`${l.q} x ${P[l.id].name} (${l.c}), size ${l.s}, ${naira(priceOf(l.id,l.s)*l.q)}`).join('\n')+`\n\nTotal: ${naira(total())}\nPlease confirm sizing and delivery.`;
 }
 function drawCart(){
   const d=$('drawer');
@@ -551,27 +589,29 @@ function drawCart(){
   }
   stepOrder=false;
   d.innerHTML=`<div class="dh wide"><span>Cart (${count()})</span><button class="x" data-close aria-label="Close cart"></button></div>
-  <div class="lines">${cart.length?cart.map((l,i)=>{const x=P[l.id];return `<div class="li"><div class="th"><img src="${x.img}" alt=""${x.photo?' class="ph"':''}></div><h4 class="wide">${x.name.replace('The ','')}</h4><div class="lp">${naira(x.price*l.q)}</div><small>${x.colour}</small>
-    <div class="ctl"><select id="size-${i}" data-line="${i}" aria-label="Size">${SIZES.map(s=>`<option${s===l.s?' selected':''}>${s}</option>`).join('')}</select>
+  <div class="lines">${cart.length?cart.map((l,i)=>{const x=P[l.id];return `<div class="li"><div class="th"><img src="${x.img}" alt="" class="ph"></div><h4 class="wide">${x.name.replace('The ','')}</h4><div class="lp">${naira(priceOf(l.id,l.s)*l.q)}</div><small>${l.c}</small>
+    <div class="ctl"><select id="size-${i}" data-line="${i}" aria-label="Size">${x.sizes.map(s=>`<option${s===l.s?' selected':''}>${s}</option>`).join('')}</select>
     <div class="step"><button data-dec="${i}" aria-label="One less">&minus;</button><span>${l.q}</span><button data-inc="${i}" aria-label="One more">+</button></div><button class="rm" data-rm="${i}">Remove</button></div></div>`}).join(''):`<div class="empty"><div>Your cart is empty.</div><button class="btn" data-close data-goto="catalogue">Browse the catalogue</button></div>`}</div>
   ${cart.length?`<div class="df"><div class="sum"><span>Subtotal</span><b style="font-weight:500">${naira(total())}</b></div><div class="hint">Delivery is confirmed with you on WhatsApp.</div><button class="btn" id="toOrder">Order on WhatsApp</button></div>`:''}`;
   const t=$('toOrder');if(t)t.onclick=()=>{stepOrder=true;drawCart()};
 }
 
 /* ---------- product sheet ---------- */
-let cur=null,curS='M',curQ=1,curView='full',overlay=null,lastFocus=null;
+let cur=null,curS='',curC='',curQ=1,curView='full',overlay=null,lastFocus=null;
 function drawSheet(){
-  const x=P[cur],sibs=ALL.filter(o=>o.set===x.set);
-  $('sheet').innerHTML=`<div class="gal">${curView==='full'?`<img class="${x.photo?'cover ph':'full'}" src="${x.img}" alt="${x.name} in ${x.colour}">`:`<img class="cover" src="${x.det}" alt="Detail of ${x.name}">`}
-    <div class="thumbs"><button data-view="full" aria-pressed="${curView==='full'}" aria-label="Full look" style="background-image:url(${x.img});background-size:${x.photo?'cover':'contain'};background-repeat:no-repeat"></button><button data-view="det" aria-pressed="${curView==='det'}" aria-label="Detail" style="background-image:url(${x.det})"></button></div></div>
-  <div class="side"><button class="x" data-close aria-label="Close"></button><h2 class="wide">${x.name}</h2><div class="price">${naira(x.price)}</div><p>${SETS[x.set].text}</p>
-    <div><div class="lab wide">Colour: ${x.colour}${REAL.includes(x.id)?'':' (preview)'}</div><div class="swatches">${sibs.map(o=>`<button class="sw" style="--c:${o.hex}" data-swap="${o.id}" aria-pressed="${o.id===cur}" aria-label="${o.colour}" title="${o.colour}"></button>`).join('')}</div></div>
-    <div><div class="lab wide">Size</div><div class="pick">${SIZES.map(s=>`<button class="s" data-s="${s}" aria-pressed="${s===curS}">${s}</button>`).join('')}</div></div>
-    <div class="buy"><div class="step"><button data-qty="-1" aria-label="One less">&minus;</button><span>${curQ}</span><button data-qty="1" aria-label="One more">+</button></div><button class="btn" id="addNow">Add to cart</button></div></div>`;
-  $('addNow').onclick=()=>{addItem(cur,curS,curQ,true);closeAll(true);openCart()};
+  const x=P[cur],pr=priceOf(cur,curS);
+  $('sheet').innerHTML=`<div class="gal">${curView==='full'?`<img class="cover ph" src="${x.img}" alt="${x.name}">`:`<img class="cover" src="${x.det}" alt="Another view of ${x.name}">`}
+    <div class="thumbs"><button data-view="full" aria-pressed="${curView==='full'}" aria-label="Main photo" style="background-image:url(${x.img})"></button><button data-view="det" aria-pressed="${curView==='det'}" aria-label="Second photo" style="background-image:url(${x.det})"></button></div></div>
+  <div class="side"><button class="x" data-close aria-label="Close"></button><h2 class="wide">${x.name}</h2><div class="price">${naira(pr)}${x.big?`<span class="for"> · size 20+ ${naira(x.big)}</span>`:''}</div><p>${x.text}</p>
+    ${x.for?`<div class="for">Perfect for: ${x.for}</div>`:''}
+    <div><div class="lab wide">Colour: ${curC}</div><div class="cols">${x.colours.map(c=>`<button data-c="${c}" aria-pressed="${c===curC}">${c}</button>`).join('')}</div></div>
+    <div><div class="lab wide">Size</div><div class="pick">${x.sizes.map(s=>`<button class="s" data-s="${s}" aria-pressed="${s===curS}">${s}</button>`).join('')}</div></div>
+    ${x.note?`<div class="note">${x.note}</div>`:''}
+    <div class="buy"><div class="step"><button data-qty="-1" aria-label="One less">&minus;</button><span>${curQ}</span><button data-qty="1" aria-label="One more">+</button></div><button class="btn" id="addNow">Add to cart · ${naira(pr*curQ)}</button></div></div>`;
+  $('addNow').onclick=()=>{addItem(cur,curS,curQ,true,curC);closeAll(true);openCart()};
 }
 function show(el){overlay=el;$('veil').classList.add('on');document.body.classList.add('lock')}
-function openSheet(id,keep){if(!keep){lastFocus=document.activeElement;curS='M';curQ=1;curView='full'}cur=id;drawSheet();$('sheet').classList.add('on');show('sheet');const c=$('sheet').querySelector('.x');c&&c.focus({preventScroll:true})}
+function openSheet(id,keep){if(!keep){lastFocus=document.activeElement;curS=defSize(P[id]);curC=P[id].colour;curQ=1;curView='full'}cur=id;drawSheet();$('sheet').classList.add('on');show('sheet');const c=$('sheet').querySelector('.x');c&&c.focus({preventScroll:true})}
 function openCart(){$('toast').classList.remove('on');lastFocus=lastFocus||document.activeElement;drawCart();$('drawer').classList.add('on');show('cart');const c=$('drawer').querySelector('.x');c&&c.focus({preventScroll:true})}
 function closeAll(keep){if(!overlay)return;overlay=null;stepOrder=false;$('sheet').classList.remove('on');$('drawer').classList.remove('on');if(!keep){$('veil').classList.remove('on');document.body.classList.remove('lock');lastFocus&&lastFocus.focus&&lastFocus.focus({preventScroll:true});lastFocus=null}}
 $('veil').onclick=()=>closeAll();$('cartBtn').onclick=openCart;
@@ -582,9 +622,9 @@ let toastT=0;function toast(t){$('toastT').textContent=t;$('toast').classList.ad
 document.addEventListener('click',e=>{
   const c=sel=>e.target.closest(sel);let b;
   if(b=c('[data-fav]')){const id=b.dataset.fav;saved.has(id)?saved.delete(id):saved.add(id);store('nc-saved',[...saved]);syncFav();if(onlySaved.on)grid();return}
-  if(b=c('[data-add]')){addItem(b.dataset.add,b.dataset.size||'M');return}
+  if(b=c('[data-add]')){addItem(b.dataset.add,b.dataset.size);return}
   if(b=c('[data-close]')){const g=b.dataset.goto;closeAll();if(g)$(g).scrollIntoView();return}
-  if(b=c('[data-swap]')){cur=b.dataset.swap;drawSheet();return}
+  if(b=c('[data-c]')){curC=b.dataset.c;drawSheet();return}
   if(b=c('[data-view]')){curView=b.dataset.view;drawSheet();return}
   if(b=c('[data-s]')){curS=b.dataset.s;drawSheet();return}
   if(b=c('[data-qty]')){curQ=Math.max(1,curQ+ +b.dataset.qty);drawSheet();return}
@@ -592,20 +632,19 @@ document.addEventListener('click',e=>{
   if(b=c('[data-dec]')){const i=+b.dataset.dec;if(--cart[i].q<1)cart.splice(i,1);saveCart();return}
   if(b=c('[data-rm]')){cart.splice(+b.dataset.rm,1);saveCart();return}
   if(b=c('[data-set]')){fSet=b.dataset.set;onlySaved.on=false;document.querySelectorAll('[data-set]').forEach(x=>x.setAttribute('aria-pressed',x===b));grid();return}
-  if(b=c('[data-col]')){fCol=fCol===b.dataset.col?null:b.dataset.col;document.querySelectorAll('[data-col]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.col===fCol));grid();return}
-  if(b=c('[data-reset]')){fSet='all';fCol=null;onlySaved.on=false;document.querySelectorAll('[data-set]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.set==='all'));document.querySelectorAll('[data-col]').forEach(x=>x.setAttribute('aria-pressed',false));grid();return}
+  if(b=c('[data-reset]')){fSet='all';onlySaved.on=false;document.querySelectorAll('[data-set]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.set==='all'));grid();return}
   if(b=c('[data-open]')){if(b.closest('.stage'))return;openSheet(b.dataset.open);return}
 });
 document.addEventListener('change',e=>{
   const s=e.target.closest('[data-line]');if(!s)return;
-  const i=+s.dataset.line,l=cart[i],o=cart.find((x,j)=>j!==i&&x.id===l.id&&x.s===s.value);
+  const i=+s.dataset.line,l=cart[i],o=cart.find((x,j)=>j!==i&&x.id===l.id&&x.s===s.value&&x.c===l.c);
   if(o){o.q+=l.q;cart.splice(i,1)}else l.s=s.value;saveCart();
 });
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('.pic')){e.preventDefault();openSheet(e.target.dataset.open)}});
 
 grid();$('count').textContent=count();
 /* women: cards and the film */
-$('wcards').innerHTML=WOMEN.map(x=>`<article class="wcard"><button class="frame" data-open="${x.id}" aria-label="View ${x.name}"><img src="${x.img}" alt="Model in ${x.name}" loading="lazy"><span class="badge wide">New</span></button>
+$('wcards').innerHTML=WOMEN.map(x=>`<article class="wcard"><button class="frame" data-open="${x.id}" aria-label="View ${x.name}"><img src="${x.img}" alt="${x.name}" loading="lazy"><span class="badge wide">New</span></button>
   <div class="dropinfo"><h3 class="wide">${x.name.replace('The ','')}</h3><div class="price">${naira(x.price)}</div>
   <div class="acts"><button class="btn light" data-open="${x.id}">Choose size</button></div></div></article>`).join('');
 (()=>{
