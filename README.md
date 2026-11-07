@@ -1,4 +1,4 @@
-# Nations Clothing concept demo
+# Nations Clothing
 
-A one-page store concept: runway of looks, new arrivals, catalogue and cart.
-Single self-contained file (`index.html`). Prices and most colours are samples. Not a live store.
+Website for Nations Clothing, a unisex fashion house in Lagos, Nigeria.
+Runway of looks, new arrivals, women's collection, catalogue and cart. Orders are sent on WhatsApp.
