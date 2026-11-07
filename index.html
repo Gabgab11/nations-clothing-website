@@ -115,6 +115,21 @@ header{position:sticky;top:0;z-index:40;background:#fff;padding:calc(12*var(--u)
 .btn.light{background:#fff;color:var(--ink)}.btn.light:hover{background:var(--sky)}
 .acts{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
 
+/* women */
+.women{--clay:#2a1711;--clay2:#3a2219;--cream:#f4e7dc;--ember:#e38c5c;background:var(--clay);color:var(--cream);display:grid;grid-template-columns:auto minmax(0,1fr);gap:calc(80*var(--u));align-items:center}
+.film{position:relative;height:min(82vh,820px);aspect-ratio:9/16;max-width:100%;background:var(--clay2) center/cover;overflow:hidden}
+.film video{display:block;width:100%;height:100%;object-fit:cover}
+.playbtn{position:absolute;right:14px;bottom:14px;width:40px;height:40px;border-radius:50%;background:rgba(42,23,17,.55);color:#fff;display:grid;place-items:center;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.playbtn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8}.playbtn .pl{fill:currentColor;stroke:none;display:none}
+.playbtn.paused .pz{display:none}.playbtn.paused .pl{display:block}
+.women .eyebrow{color:var(--ember)}.women .lead{color:#cdb6a6;margin-top:18px}
+.wcards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:calc(24*var(--u));margin-top:calc(44*var(--u));max-width:640px}
+.wcard{min-width:0}
+.wcard .frame{background:var(--clay2)}.wcard .frame img{aspect-ratio:4/5;object-position:50% 18%}
+.wcard .dropinfo p{color:#cdb6a6}
+.wcard .dropinfo{margin-top:14px}.wcard .acts{margin-top:4px}
+.wcard .btn.light:hover{background:var(--ember)}
+
 /* catalogue */
 .cat .top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:calc(30*var(--u))}
 .filters{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;padding:14px 0;border-block:1px solid var(--line);margin-bottom:calc(30*var(--u))}
@@ -129,6 +144,8 @@ header{position:sticky;top:0;z-index:40;background:#fff;padding:calc(12*var(--u)
 .tile{min-width:0}
 .pic{position:relative;display:block;width:100%;aspect-ratio:4/5;overflow:hidden;cursor:pointer;background:linear-gradient(180deg,#eef4f9,#dfe9f3)}
 .pic .main{position:absolute;left:6%;right:6%;bottom:0;height:92%;width:88%;object-fit:contain;object-position:50% 100%;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .35s}
+.pic .cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.gal .cover.ph{object-position:50% 12%}
 .pic .det{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s}
 .tile:hover .det,.tile:focus-within .det{opacity:1}
 .tile .fav{left:12px;top:12px;z-index:3}
@@ -171,6 +188,7 @@ footer a{color:#eaf1f8;border-bottom:1px solid rgba(234,241,248,.35)}
 .li{display:grid;grid-template-columns:84px minmax(0,1fr) auto;gap:4px 14px;padding:16px 0;border-bottom:1px solid var(--line)}
 .li .th{grid-row:1/4;width:84px;height:104px;background:linear-gradient(180deg,#eef4f9,#dfe9f3);display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
 .li .th img{width:100%;height:96%;object-fit:contain;object-position:50% 100%}
+.li .th img.ph{height:100%;object-fit:cover;object-position:50% 15%}
 .li h4{font-weight:400;font-size:9.5px;line-height:1.5;letter-spacing:.13em}
 .li .lp{font-size:14px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .li small{grid-column:2/4;font-size:13px;color:var(--mid)}
@@ -235,6 +253,9 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
   .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 10px}
   .count{margin-left:0;width:100%}
   .house{grid-template-columns:1fr;gap:34px}
+  .women{grid-template-columns:1fr;gap:30px}
+  .film{height:auto;width:100%;max-height:82vh;max-height:82svh;margin-inline:auto}
+  .wcards{gap:12px;margin-top:28px}.wcard .dropinfo{grid-template-columns:1fr}.wcard .dropinfo .price{grid-column:1;grid-row:auto}.wcard .acts .btn{width:100%;padding:0 10px}
   .sheet{top:auto;left:0;bottom:0;width:100%;max-height:92vh;max-height:92svh;grid-template-columns:1fr;transform:translateY(30px)}
   .sheet.on{transform:none}.gal{min-height:0;height:46svh}
   .side{padding:22px 16px calc(18px + env(safe-area-inset-bottom,0px))}
@@ -246,7 +267,7 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
 <header id="top">
   <div class="r1">
     <a class="brand" href="#top" aria-label="Nations Clothing home"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 399 290"><path fill-rule="evenodd" d="M246.6,250.2 245.0,248.6 243.8,248.0 242.4,247.8 239.4,248.2 237.6,249.2 236.4,250.4 235.8,250.4 235.4,250.0 235.4,248.4 235.0,248.0 233.8,248.0 229.8,249.2 229.4,250.0 230.6,250.6 231.6,252.2 231.6,265.0 230.0,267.0 228.6,267.2 227.8,266.8 226.6,265.2 226.6,248.4 226.2,248.0 224.8,248.0 220.6,249.2 220.2,249.8 222.2,251.4 222.6,252.8 222.6,264.6 222.2,265.8 220.2,267.4 221.0,267.8 236.8,267.8 237.2,267.2 235.4,265.0 235.4,253.8 235.8,252.8 237.6,251.0 239.6,250.2 241.0,250.2 242.0,250.6 243.0,251.6 243.8,253.4 243.8,264.4 243.4,265.6 242.0,267.4 242.6,267.8 249.4,267.6 249.4,267.2 247.6,265.0 247.6,252.8ZM267.6,248.4 263.2,248.8 261.6,248.0 259.2,247.6 256.0,248.0 253.4,249.4 251.4,251.8 250.8,253.6 251.0,256.0 252.0,258.2 254.0,260.0 254.0,261.0 252.4,262.2 251.2,264.0 251.2,265.2 253.0,267.2 253.0,267.8 250.2,270.4 249.6,271.6 249.8,273.6 251.4,275.4 255.8,276.6 258.6,276.6 260.8,276.2 264.6,274.8 266.0,273.8 267.8,271.8 268.6,270.0 268.6,267.6 268.0,266.4 266.8,265.2 264.0,264.2 255.8,264.2 254.8,263.8 254.2,263.0 254.2,262.2 255.6,261.0 260.8,261.0 263.0,260.2 265.2,258.4 266.6,255.8 266.6,253.0 266.0,251.8 266.0,251.0 266.4,250.6 267.6,250.6 268.4,250.0 268.4,249.0ZM252.6,271.6 253.0,269.6 255.0,267.8 264.2,267.8 265.4,268.4 266.8,270.2 266.4,271.4 264.6,273.2 260.4,274.6 257.4,274.6 255.2,274.0 253.8,273.2ZM258.4,248.8 259.6,249.0 261.2,250.2 262.2,251.6 262.8,254.0 262.8,255.8 262.0,258.2 260.8,259.4 259.4,260.0 258.4,260.0 257.2,259.4 255.6,257.6 255.0,256.0 255.2,251.8 255.8,250.6 257.2,249.2ZM177.2,247.6 175.2,248.0 172.4,249.2 169.8,251.8 168.2,255.6 168.0,259.0 169.0,262.6 169.6,263.8 171.2,265.6 175.0,267.8 179.2,268.2 182.6,267.2 185.2,265.4 186.6,263.8 187.6,261.8 188.2,259.4 188.2,255.4 187.8,253.8 186.4,251.4 184.0,249.2 181.6,248.0ZM177.6,248.8 179.4,249.0 181.6,250.6 183.0,252.8 183.8,255.8 183.8,260.2 183.0,263.2 182.2,264.8 181.0,266.0 179.0,266.8 177.0,266.6 175.0,265.4 173.6,263.4 172.8,260.6 172.8,254.6 173.6,252.0 175.4,249.8ZM193.8,243.6 192.4,245.6 190.2,247.8 188.8,248.4 188.2,249.4 188.6,249.8 190.0,250.0 190.6,250.6 190.8,265.2 191.4,266.4 192.6,267.6 193.6,268.0 195.8,268.0 197.6,267.0 198.6,266.0 199.0,265.0 198.8,264.6 198.4,264.6 197.2,265.6 196.0,265.8 194.6,264.2 194.4,251.4 195.0,250.2 198.2,250.0 198.8,249.0 198.2,248.2 195.4,248.2 194.6,247.6 194.4,244.0 194.2,243.6ZM224.2,240.0 223.2,240.4 221.8,242.0 222.0,243.2 223.6,244.8 224.4,244.8 226.4,242.8 226.2,241.4ZM199.4,239.4 199.2,240.2 200.0,240.6 201.2,242.2 201.2,265.2 199.6,267.0 199.6,267.6 207.0,267.6 207.0,267.2 205.6,266.0 205.0,264.0 205.0,254.6 205.8,252.6 207.6,250.8 209.4,250.0 210.6,250.0 211.8,250.6 213.0,251.8 213.4,252.8 213.4,264.8 212.0,267.0 212.0,267.6 219.2,267.6 219.4,267.4 217.8,266.0 217.4,265.0 217.4,253.4 216.0,249.8 214.2,248.2 211.2,247.8 209.4,248.2 207.4,249.2 206.2,250.4 205.4,250.4 205.0,249.8 205.0,238.8 204.0,238.2ZM165.0,238.2 159.4,239.6 159.4,240.0 161.4,241.6 161.8,242.6 161.8,264.2 161.2,265.8 159.6,267.4 160.2,267.8 167.4,267.8 167.8,267.4 165.8,265.2 165.8,239.6 165.6,238.6ZM154.8,239.4 153.6,240.2 152.6,240.2 150.2,239.0 147.6,238.2 141.0,238.2 135.8,240.2 131.8,243.6 129.2,248.4 128.6,252.2 128.6,254.6 129.0,257.6 130.0,260.4 131.6,263.0 133.6,265.0 135.8,266.6 138.8,267.8 141.8,268.4 145.0,268.4 149.0,267.6 151.0,266.6 154.4,264.0 155.8,262.4 156.8,260.8 156.6,259.4 156.0,259.4 152.8,263.2 149.8,265.2 146.4,266.2 142.2,266.0 139.6,264.8 136.6,261.8 135.4,259.6 134.4,255.8 134.4,249.8 134.8,247.8 136.0,244.8 138.4,241.8 140.0,240.6 142.6,239.6 145.2,239.4 147.8,240.0 150.2,241.2 153.0,243.8 154.8,247.0 155.2,248.4 156.0,248.6 156.4,248.2 156.4,246.8 155.4,240.2ZM180.4,158.8 180.0,159.0 180.0,159.4 181.2,160.4 182.2,162.0 183.0,164.0 183.4,166.4 183.4,225.2 182.0,230.2 179.4,233.0 179.8,233.4 199.2,233.4 199.6,232.6 197.6,230.6 196.8,229.0 196.0,225.6 195.8,222.0 196.0,159.6 195.4,158.8ZM259.6,158.8 259.6,159.2 262.4,162.0 263.8,164.6 265.0,170.0 265.8,169.8 268.8,166.4 276.2,159.2 276.0,158.6ZM309.2,162.0 306.0,160.2 301.2,158.6 296.6,158.0 290.4,158.2 286.8,159.0 281.4,161.4 278.2,163.4 272.0,168.4 272.4,169.6 272.2,170.4 269.6,174.0 265.6,178.6 264.8,180.4 264.8,225.4 263.8,229.4 263.0,230.8 260.6,233.0 260.8,233.4 281.0,233.4 281.4,233.0 278.6,230.0 277.2,226.4 276.8,223.8 276.8,167.4 278.4,165.4 282.2,162.6 286.2,160.6 288.6,159.8 292.6,159.2 296.4,159.8 298.6,161.0 300.8,163.2 302.2,166.0 302.8,169.6 302.8,224.0 301.8,229.2 300.8,231.0 298.6,233.2 319.0,233.2 319.0,232.8 316.8,230.6 315.8,228.6 315.0,224.4 315.0,171.6 314.4,168.8 313.6,167.0 312.0,164.6ZM97.8,164.0 94.2,167.6 92.8,170.8 92.8,173.6 93.6,175.6 95.6,177.8 97.0,178.6 101.6,179.6 108.2,179.0 114.0,177.4 119.4,175.0 121.8,174.4 122.6,174.6 123.2,175.2 123.2,176.4 120.2,179.4 109.0,185.2 100.4,190.4 96.4,193.4 92.4,197.4 90.4,200.0 88.2,204.2 86.8,209.6 86.8,213.0 87.4,216.8 88.8,220.4 90.4,223.0 92.4,225.4 96.8,228.6 101.0,230.6 107.0,232.2 112.2,232.8 147.0,232.6 147.0,232.0 145.0,230.2 144.0,228.4 143.2,224.6 143.2,172.4 142.6,169.4 140.4,165.4 137.6,162.6 133.4,160.2 127.8,158.6 123.4,158.0 114.8,158.0 109.2,159.0 103.2,161.0ZM116.0,159.0 120.8,159.2 123.4,160.0 125.6,161.2 127.4,162.8 129.0,165.0 130.2,168.0 130.6,170.2 130.6,224.2 129.6,229.2 128.6,230.8 127.2,231.4 118.2,231.2 116.0,230.8 113.0,229.8 108.8,227.4 106.2,225.2 103.0,220.6 101.4,217.0 100.6,213.6 100.4,207.0 101.2,202.8 102.2,199.8 105.6,193.8 111.0,187.8 115.8,184.0 124.8,178.2 126.8,176.2 127.4,175.0 127.4,173.8 126.2,172.6 124.8,172.4 121.6,173.2 118.0,175.0 114.6,176.2 109.2,177.4 105.8,176.6 103.8,174.6 103.0,172.4 103.0,169.8 103.8,167.0 105.6,164.2 109.0,161.4 111.4,160.2ZM239.0,158.2 233.2,157.8 229.0,158.0 224.6,158.8 220.0,160.2 214.4,163.2 212.0,165.0 209.2,167.8 207.2,171.0 206.0,174.6 205.8,177.8 206.2,180.0 207.0,182.2 208.4,184.6 211.0,187.4 213.2,189.2 221.2,193.8 222.4,195.0 223.2,196.8 222.8,198.6 221.0,200.6 213.0,205.4 208.2,210.2 206.0,215.0 205.8,218.4 206.2,220.8 207.0,223.2 208.6,226.0 212.2,229.6 217.6,232.6 224.8,234.6 234.8,234.8 239.4,234.0 243.8,232.6 250.0,229.4 252.0,227.8 255.2,224.4 256.4,222.4 257.4,219.2 257.6,216.2 256.6,212.4 254.4,209.2 250.8,206.0 241.0,200.0 239.8,198.4 239.6,196.4 240.8,194.4 242.4,193.0 247.6,189.8 248.4,189.6 254.8,184.8 265.2,174.6 266.4,173.8 267.8,172.0 258.4,180.6 257.8,180.8 257.2,180.2 258.0,178.0 257.8,172.6 256.6,169.2 254.6,166.2 251.4,163.2 246.0,160.2ZM231.0,159.2 236.0,159.6 238.2,160.4 240.8,162.0 242.6,163.8 244.6,166.6 245.8,169.8 246.2,172.0 246.2,178.0 245.0,183.2 242.0,189.0 238.4,193.6 237.4,195.8 237.4,198.4 237.8,199.6 242.0,205.8 244.2,209.8 245.0,212.0 245.6,215.4 245.4,221.2 244.0,225.4 240.6,230.0 236.2,232.6 233.0,233.4 229.8,233.4 227.0,232.8 224.8,231.8 222.8,230.4 221.2,228.8 219.2,226.0 218.0,222.8 217.4,219.6 217.4,215.6 218.8,209.8 221.2,205.0 223.4,202.0 225.4,198.0 225.4,195.8 224.6,193.6 220.6,187.8 218.6,183.0 217.6,177.6 218.0,171.2 219.4,167.2 222.8,162.8 225.2,161.0 227.4,160.0ZM188.4,138.4 181.0,145.6 180.8,146.6 188.2,154.2 188.8,154.2 196.6,147.0 196.8,145.8 189.2,138.6ZM148.8,133.2 148.4,133.4 148.4,134.0 151.0,136.6 152.2,139.8 152.4,157.4 152.2,158.0 151.0,158.8 145.8,158.6 144.8,159.0 144.6,159.8 145.2,160.4 151.0,160.4 151.6,160.6 152.4,161.8 152.2,213.4 152.4,221.8 152.8,224.2 153.6,226.4 154.8,228.4 158.2,231.4 160.6,232.6 163.6,233.4 169.2,233.4 170.0,232.8 167.8,231.2 166.0,229.0 164.8,226.0 164.6,224.2 164.6,161.6 164.8,161.0 165.6,160.4 174.0,160.4 174.6,159.6 173.8,158.8 165.8,158.8 164.6,157.6 164.6,133.8 163.8,133.2ZM346.2,132.8 339.0,134.2 333.2,136.4 329.2,138.8 326.2,141.2 323.6,144.2 320.4,149.8 319.2,155.4 319.2,158.0 320.4,163.8 322.2,167.8 325.2,172.0 328.0,174.4 333.4,177.6 339.0,179.4 343.2,180.2 353.0,180.8 357.6,181.8 361.0,183.2 364.4,185.6 367.0,188.4 369.6,193.0 370.8,197.6 371.2,200.8 371.2,205.8 370.0,213.0 367.4,219.6 364.8,223.8 361.6,227.4 356.8,230.8 351.8,232.2 348.2,232.2 343.4,231.0 340.0,229.0 336.0,224.6 334.8,222.4 333.0,217.0 332.8,209.8 333.8,205.6 336.2,200.8 338.0,198.4 341.8,194.8 341.8,194.4 337.8,193.8 332.2,194.0 329.0,195.0 326.0,196.8 323.2,199.8 321.4,203.2 320.4,206.8 320.2,211.4 321.0,216.0 323.2,221.0 325.4,224.2 330.0,228.4 333.6,230.6 338.8,232.6 346.8,233.8 351.2,233.8 359.0,232.6 365.0,230.6 371.6,226.8 377.6,221.2 380.4,217.2 382.6,212.8 384.2,206.2 384.4,199.2 383.4,194.2 381.6,190.0 378.2,185.4 374.2,182.0 369.0,179.2 362.2,177.0 357.2,176.2 350.4,176.0 345.6,174.8 341.6,172.8 337.8,169.6 334.8,165.6 332.6,160.2 331.8,155.2 331.8,153.0 332.8,146.6 335.0,142.2 338.4,138.2 342.4,135.6 344.6,134.8 348.0,134.2 352.8,134.4 355.0,134.8 359.4,137.0 362.8,140.4 363.8,142.6 364.4,147.2 361.8,157.4 362.0,161.6 363.8,165.6 365.2,167.4 367.4,169.2 371.0,170.8 374.4,171.6 378.4,171.6 378.6,171.2 376.2,168.0 374.8,164.0 374.6,159.2 376.0,153.4 376.4,148.4 375.6,145.2 374.6,143.2 372.8,140.8 369.6,138.0 364.2,135.2 357.0,133.2 353.6,132.8ZM28.6,133.8 24.6,136.2 21.4,139.6 19.2,143.2 17.2,149.4 16.8,153.0 16.6,219.4 16.0,223.8 15.0,226.6 13.0,229.6 11.8,230.8 9.2,232.4 9.4,232.8 14.6,233.0 26.8,232.6 26.6,232.0 24.2,230.8 23.0,229.6 20.8,226.0 19.6,221.8 19.0,215.8 19.2,152.2 19.8,149.2 21.4,145.0 23.8,142.2 26.0,141.0 27.8,141.0 30.0,142.0 32.4,144.4 35.8,151.0 51.4,201.2 53.0,205.4 53.6,208.2 58.2,222.0 60.4,226.8 62.2,229.6 63.6,231.0 66.2,232.6 67.6,233.0 70.0,233.0 72.2,232.4 74.2,231.0 76.4,228.4 78.2,224.6 79.2,218.8 79.2,146.6 79.8,143.0 81.0,139.2 82.4,137.0 86.2,133.6 85.8,133.2 69.0,133.4 69.6,134.4 72.0,135.8 74.4,138.6 75.8,141.8 77.0,149.4 77.2,218.6 76.8,221.2 75.8,223.4 74.0,224.8 73.0,224.6 71.4,223.0 70.0,219.8 61.8,194.2 59.4,185.6 57.8,181.6 57.6,179.8 56.6,177.4 55.6,173.4 53.0,166.0 52.6,163.8 46.6,145.0 43.6,139.2 42.4,137.6 39.0,134.4 37.0,133.4 34.4,132.8 31.0,133.0ZM217.0,103.4 216.2,103.6 212.4,107.6 212.4,108.4 216.4,112.4 217.2,112.2 221.0,108.4 221.0,107.4ZM109.6,75.2 109.0,76.4 109.2,84.6 110.0,85.2 113.4,85.2 116.0,84.4 117.4,83.0 118.2,81.2 118.2,79.0 117.6,77.4 116.0,75.8 114.2,75.0ZM112.0,76.6 113.6,76.6 114.6,77.0 116.2,79.0 116.2,81.0 115.8,82.0 114.8,83.0 113.2,83.6 112.2,83.6 111.0,82.6 111.0,77.4ZM99.4,75.0 98.6,75.6 98.6,76.0 99.4,76.6 100.6,76.6 101.6,78.0 101.6,84.6 102.6,85.2 103.4,84.6 103.4,77.6 104.4,76.6 106.2,76.4 106.4,75.4 105.6,75.0ZM286.0,74.6 283.8,75.4 282.4,76.8 281.6,78.8 281.6,81.2 283.0,83.8 284.2,84.6 286.6,85.0 288.6,84.4 289.6,83.4 290.6,81.4 290.8,79.4 289.8,76.6 288.6,75.4 287.4,74.8ZM285.4,76.4 286.8,76.4 287.6,76.8 288.8,78.6 288.8,81.0 288.2,82.2 286.6,83.4 285.2,83.2 284.0,82.0 283.6,81.0 283.8,78.2 284.2,77.4ZM273.0,75.4 272.0,76.4 272.2,77.6 272.8,77.8 274.2,76.6 275.4,76.2 277.0,77.2 277.0,78.4 274.8,80.8 272.0,83.0 271.8,84.4 272.4,84.8 279.0,84.6 279.0,83.4 276.2,83.2 275.6,82.8 275.6,82.2 278.4,79.6 278.8,78.8 279.0,77.0 278.6,76.2 277.6,75.2 276.0,74.6ZM99.4,60.4 99.0,61.2 99.2,70.0 99.6,70.4 100.8,70.6 106.4,70.2 106.6,69.6 105.8,68.8 101.8,68.8 101.0,68.0 101.0,67.0 101.4,66.4 104.2,66.2 105.6,65.6 105.4,64.8 105.0,64.6 101.6,64.4 101.0,63.8 101.0,62.6 101.8,62.0 106.0,61.8 106.4,61.6 106.4,60.6 105.4,60.2ZM285.2,60.0 284.0,60.4 282.2,62.0 281.6,63.6 281.4,65.8 282.2,68.2 283.6,69.6 285.2,70.2 287.0,70.2 288.6,69.6 289.8,68.4 290.6,66.6 290.6,63.8 289.0,61.0 287.0,60.0ZM285.6,61.6 287.4,62.0 288.8,64.0 288.6,66.6 288.2,67.4 286.6,68.6 285.2,68.4 283.8,67.0 283.4,65.8 283.8,63.2ZM273.2,60.4 272.0,61.6 272.0,62.4 272.4,62.8 273.2,62.8 274.8,61.6 275.8,61.6 277.0,62.6 277.0,63.8 272.0,68.4 271.8,69.6 272.2,70.0 279.0,69.8 279.2,69.2 278.8,68.6 276.6,68.6 275.6,68.0 275.6,67.4 278.0,65.4 279.0,63.8 279.2,62.8 278.6,61.4 276.6,60.0 274.4,60.0ZM112.0,60.2 110.2,61.4 109.6,62.4 109.6,63.6 110.0,64.4 111.2,65.4 114.8,66.6 115.4,67.2 115.4,68.0 114.2,69.0 113.2,69.0 111.0,67.8 110.2,67.8 109.6,68.4 109.6,69.0 110.4,69.8 112.4,70.6 114.6,70.6 116.4,69.8 117.2,69.0 117.6,67.0 116.2,65.2 112.6,64.0 112.0,63.4 112.0,62.4 112.8,61.8 114.2,61.8 116.0,62.8 116.6,62.8 117.2,61.8 116.6,61.0 115.2,60.2ZM233.6,35.8 231.0,34.4 228.6,34.4 225.8,35.4 220.6,39.0 208.2,50.2 161.4,96.0 160.6,96.2 160.4,95.6 162.4,92.4 171.6,80.4 173.6,77.2 176.6,73.8 178.0,71.6 181.4,67.6 195.4,49.2 199.6,42.6 201.4,39.0 202.2,36.0 202.2,33.6 201.4,31.2 199.6,29.6 197.8,29.0 194.6,29.0 192.0,29.6 189.4,30.8 184.8,34.2 180.0,38.4 156.6,61.4 152.4,65.0 147.4,67.6 150.8,71.6 151.4,71.8 151.8,71.4 152.0,70.0 153.0,67.6 155.2,64.8 182.6,37.8 187.4,33.6 189.6,32.2 192.4,31.0 193.4,31.0 194.6,31.8 195.2,33.0 194.8,36.0 191.0,42.2 186.0,49.2 163.4,77.6 157.6,85.8 155.0,90.2 153.0,94.2 152.2,96.6 152.0,100.0 152.8,102.2 155.0,104.2 156.2,104.6 158.4,104.6 162.8,102.8 167.6,99.4 186.2,82.2 227.4,42.0 228.0,42.0 228.4,42.4 228.0,43.4 223.8,49.6 211.2,66.2 209.2,68.4 195.2,87.8 191.2,94.2 189.2,98.4 188.2,101.8 188.0,104.4 189.2,108.0 190.8,109.6 193.0,110.6 196.4,110.6 200.2,109.4 204.2,106.6 212.2,99.2 235.2,76.2 238.8,73.4 242.2,71.8 241.6,70.8 240.6,70.2 238.8,68.2 238.4,68.2 236.2,72.6 234.0,75.4 206.2,103.0 202.6,106.2 199.2,108.2 197.4,108.4 196.0,107.4 195.4,106.2 195.8,103.0 200.2,94.2 208.8,81.8 217.6,70.8 226.2,59.0 233.2,48.4 234.6,45.2 235.6,41.8 235.6,39.2 234.6,37.0ZM185.0,10.8 178.0,12.2 174.2,13.4 167.0,16.2 161.6,19.0 154.2,24.2 150.2,27.6 144.4,33.6 141.4,37.4 137.6,43.4 135.2,48.2 132.4,55.4 131.0,60.6 130.0,67.0 129.8,71.0 130.0,78.6 131.0,85.6 132.0,89.6 134.4,96.4 137.2,102.2 141.2,108.6 145.6,114.0 150.6,119.0 158.2,124.8 167.2,129.6 172.4,131.6 179.2,133.6 184.8,134.6 191.8,135.2 199.8,135.0 205.6,134.4 210.6,133.4 217.4,131.4 222.0,129.6 230.8,125.0 236.0,121.4 240.2,117.8 244.6,113.4 248.0,109.2 251.6,103.8 254.6,98.0 256.4,93.6 258.6,86.4 259.6,81.2 260.0,73.6 259.4,63.4 257.8,56.2 256.4,52.0 253.2,44.8 250.0,39.4 244.8,32.4 239.4,27.0 232.0,21.2 225.6,17.4 218.4,14.2 212.0,12.2 200.2,10.2 190.4,10.2ZM186.6,13.8 191.0,13.4 199.2,13.4 205.2,14.0 210.0,15.0 216.4,16.8 222.8,19.6 231.6,24.8 236.6,28.8 242.2,34.4 246.2,39.4 249.2,44.0 253.8,54.2 255.0,58.2 256.2,64.4 256.8,69.0 256.8,76.4 255.0,87.8 252.8,94.2 249.6,101.0 244.4,108.6 242.2,111.2 236.2,117.0 231.0,121.0 224.4,125.0 220.0,127.0 212.0,129.8 203.0,131.6 197.6,132.0 188.2,131.8 178.0,130.0 169.4,127.0 164.8,124.8 158.2,120.8 153.8,117.4 148.4,112.2 143.8,106.6 140.8,102.0 136.0,91.6 134.8,87.6 133.6,81.4 133.0,76.2 133.0,70.4 133.6,64.8 134.8,58.8 136.2,54.2 138.8,48.0 141.0,43.8 144.2,39.0 147.8,34.6 153.6,28.8 160.6,23.6 169.0,19.0 174.0,17.0 180.0,15.2Z"/></svg><span class="demo wide">Demo</span></a>
-    <nav class="tabs wide" aria-label="Sections"><a class="on" href="#runway">Runway</a><a href="#new">New Arrivals</a><a href="#catalogue">Catalogue</a><a href="#house">The House</a></nav>
+    <nav class="tabs wide" aria-label="Sections"><a class="on" href="#runway">Runway</a><a href="#new">New Arrivals</a><a href="#women">Women</a><a href="#catalogue">Catalogue</a><a href="#house">The House</a></nav>
     <div class="acct wide">
       <button class="sv" id="savedBtn">Saved (<span id="saved">0</span>)</button>
       <button class="bag" id="cartBtn" aria-label="Open cart">Cart <i id="count">0</i></button>
@@ -298,6 +319,19 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
   </div>
 </section>
 
+<section class="sec women" id="women">
+  <div class="film">
+    <video id="wvid" muted playsinline loop preload="none" data-poster="women-poster" aria-label="Campaign film: two women in emerald and sapphire bubu gowns"></video>
+    <button class="playbtn" id="wplay" aria-label="Pause film"><svg viewBox="0 0 14 14"><path class="pz" d="M4 2v10M10 2v10"/><path class="pl" d="M4 2l8 5-8 5z"/></svg></button>
+  </div>
+  <div class="wcopy">
+    <div class="eyebrow wide">Women</div>
+    <h2 class="h2 wide">For the Queens</h2>
+    <p class="lead">Full, flowing bubu gowns in textured metallic fabric, with gathered puff sleeves and a sheer hem.</p>
+    <div class="wcards" id="wcards"></div>
+  </div>
+</section>
+
 <section class="sec cat" id="catalogue">
   <div class="top"><div><div class="eyebrow wide">The full line</div><h2 class="h2 wide">Catalogue</h2></div></div>
   <div class="filters">
@@ -332,22 +366,25 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
 <div class="wait" id="wait"></div>
 
 <script>
-const A={"blossom": "img/blossom.webp", "d-monarch-clay": "img/d-monarch-clay.webp", "d-monarch-ink": "img/d-monarch-ink.webp", "d-monarch-ivory": "img/d-monarch-ivory.webp", "d-monarch-sage": "img/d-monarch-sage.webp", "d-monarch-sky": "img/d-monarch-sky.webp", "d-monarch-wine": "img/d-monarch-wine.webp", "d-regent-bottle": "img/d-regent-bottle.webp", "d-regent-midnight": "img/d-regent-midnight.webp", "d-regent-onyx": "img/d-regent-onyx.webp", "d-regent-oxblood": "img/d-regent-oxblood.webp", "d-regent-stone": "img/d-regent-stone.webp", "d-regent-umber": "img/d-regent-umber.webp", "hero-monarch": "img/hero-monarch.webp", "hero-regent": "img/hero-regent.webp", "monarch-clay": "img/monarch-clay.webp", "monarch-ink": "img/monarch-ink.webp", "monarch-ivory": "img/monarch-ivory.webp", "monarch-sage": "img/monarch-sage.webp", "monarch-sky": "img/monarch-sky.webp", "monarch-wine": "img/monarch-wine.webp", "regent-bottle": "img/regent-bottle.webp", "regent-midnight": "img/regent-midnight.webp", "regent-onyx": "img/regent-onyx.webp", "regent-oxblood": "img/regent-oxblood.webp", "regent-stone": "img/regent-stone.webp", "regent-umber": "img/regent-umber.webp"};
+const A={"blossom": "img/blossom.webp", "d-monarch-clay": "img/d-monarch-clay.webp", "d-monarch-ink": "img/d-monarch-ink.webp", "d-monarch-ivory": "img/d-monarch-ivory.webp", "d-monarch-sage": "img/d-monarch-sage.webp", "d-monarch-sky": "img/d-monarch-sky.webp", "d-monarch-wine": "img/d-monarch-wine.webp", "d-regent-bottle": "img/d-regent-bottle.webp", "d-regent-midnight": "img/d-regent-midnight.webp", "d-regent-onyx": "img/d-regent-onyx.webp", "d-regent-oxblood": "img/d-regent-oxblood.webp", "d-regent-stone": "img/d-regent-stone.webp", "d-regent-umber": "img/d-regent-umber.webp", "d-women-emerald": "img/d-women-emerald.webp", "d-women-sapphire": "img/d-women-sapphire.webp", "hero-monarch": "img/hero-monarch.webp", "hero-regent": "img/hero-regent.webp", "monarch-clay": "img/monarch-clay.webp", "monarch-ink": "img/monarch-ink.webp", "monarch-ivory": "img/monarch-ivory.webp", "monarch-sage": "img/monarch-sage.webp", "monarch-sky": "img/monarch-sky.webp", "monarch-wine": "img/monarch-wine.webp", "regent-bottle": "img/regent-bottle.webp", "regent-midnight": "img/regent-midnight.webp", "regent-onyx": "img/regent-onyx.webp", "regent-oxblood": "img/regent-oxblood.webp", "regent-stone": "img/regent-stone.webp", "regent-umber": "img/regent-umber.webp", "women-emerald": "img/women-emerald.webp", "women-poster": "img/women-poster.webp", "women-sapphire": "img/women-sapphire.webp"};
 const META={"monarch-sky": [1102, 1200], "monarch-sage": [1102, 1200], "monarch-clay": [1102, 1200], "monarch-ivory": [1102, 1200], "monarch-wine": [1102, 1200], "monarch-ink": [1102, 1200], "regent-onyx": [506, 1300], "regent-midnight": [506, 1300], "regent-umber": [506, 1300], "regent-bottle": [506, 1300], "regent-oxblood": [506, 1300], "regent-stone": [506, 1300]};
 const SETS={
   monarch:{name:'The Monarch Set',price:95000,k:.8,short:'Monarch',
     text:'For the kings who love to look good without doing too much. A tunic and trouser set with a contrast collar and a single piped pocket.'},
+  women:{name:'Bubu Gown',price:120000,k:1,short:'Women',
+    text:'A full, flowing bubu gown in textured metallic fabric, with gathered puff sleeves and a sheer hem. Wear it with a gele for occasions.'},
   regent:{name:'The Regent Set',price:135000,k:1,short:'Regent',
     text:'A relaxed, flowing silhouette in premium textured fabric, refined with worked panels at the sleeve and pocket.'}};
 const COL={sky:['Sky','#93cdee'],sage:['Sage','#8fa78c'],clay:['Clay','#b58a68'],ivory:['Ivory','#ece4d3'],wine:['Wine','#6e2a38'],ink:['Ink','#2b3550'],
-  onyx:['Onyx','#16171b'],midnight:['Midnight','#27375f'],umber:['Umber','#70462b'],bottle:['Bottle','#27473b'],oxblood:['Oxblood','#5c1f28'],stone:['Stone','#a59a8b']};
-const REAL=['monarch-sky','regent-onyx'];
+  onyx:['Onyx','#16171b'],midnight:['Midnight','#27375f'],umber:['Umber','#70462b'],bottle:['Bottle','#27473b'],oxblood:['Oxblood','#5c1f28'],stone:['Stone','#a59a8b'],emerald:['Emerald','#11823f'],sapphire:['Sapphire','#1d4a73']};
+const REAL=['monarch-sky','regent-onyx','women-emerald','women-sapphire'];
 const small=Math.min(screen.width,innerWidth)<=820;
 const pic=k=>small&&A[k].slice(0,4)==='img/'?A[k].replace('img/','img/s/'):A[k];
 const P={};['regent-onyx','monarch-sky','regent-umber','monarch-sage','regent-midnight','monarch-ivory','regent-bottle','monarch-clay','regent-oxblood','monarch-wine','regent-stone','monarch-ink'].forEach(id=>{
   const [set,col]=id.split('-');P[id]={id,set,col,name:SETS[set].name,colour:COL[col][0],hex:COL[col][1],price:SETS[set].price,img:pic(id),det:pic('d-'+id)}});
-const ALL=Object.values(P),SIZES=['S','M','L','XL','XXL'];
-const LOOKS=ALL.slice(0,6);
+const LOOKS=Object.values(P).slice(0,6);
+const WOMEN=[['women-emerald','The Emerald Bubu'],['women-sapphire','The Sapphire Bubu']].map(([id,name])=>{const col=id.split('-')[1];return P[id]={id,set:'women',col,name,colour:COL[col][0],hex:COL[col][1],price:SETS.women.price,img:pic(id),det:pic('d-'+id),photo:true}});
+const ALL=[...WOMEN,...LOOKS,...Object.values(P).filter(x=>x.set!=='women'&&!LOOKS.includes(x))],SIZES=['S','M','L','XL','XXL'];
 const naira=n=>'₦'+n.toLocaleString('en-NG');
 const $=id=>document.getElementById(id),calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const heart='<svg viewBox="0 0 24 24"><path d="M12 20S3.5 15 3.5 9A4.6 4.6 0 0 1 12 6.600 4.600 4.600 0 0 1 20.500 9C20.500 15 12 20 12 20Z"/></svg>';
@@ -472,13 +509,13 @@ const onlySaved={on:false};
 const saved=new Set(load('nc-saved',[]));
 function load(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}}
 function store(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-$('sets').innerHTML=[['all','All'],['monarch','Monarch'],['regent','Regent']].map(([v,t])=>`<button class="chip" data-set="${v}" aria-pressed="${v==='all'}">${t}</button>`).join('');
+$('sets').innerHTML=[['all','All'],['women','Women'],['monarch','Monarch'],['regent','Regent']].map(([v,t])=>`<button class="chip" data-set="${v}" aria-pressed="${v==='all'}">${t}</button>`).join('');
 $('colours').innerHTML=[...new Set(ALL.map(x=>x.col))].map(c=>`<button class="sw" style="--c:${COL[c][1]}" data-col="${c}" aria-pressed="false" aria-label="${COL[c][0]}" title="${COL[c][0]}"></button>`).join('');
 function grid(){
   const list=ALL.filter(x=>(fSet==='all'||x.set===fSet)&&(!fCol||x.col===fCol)&&(!onlySaved.on||saved.has(x.id)));
   $('shown').textContent=(onlySaved.on?'Saved: ':'')+list.length+(list.length===1?' piece':' pieces');
   $('grid').innerHTML=list.map(x=>`<article class="tile"><div class="pic" data-open="${x.id}" role="button" tabindex="0" aria-label="View ${x.name} in ${x.colour}">
-    <img class="main" src="${x.img}" alt="${x.name} in ${x.colour}" loading="lazy"><img class="det" src="${x.det}" alt="" loading="lazy">
+    <img class="${x.photo?'cover':'main'}" src="${x.img}" alt="${x.name} in ${x.colour}" loading="lazy"><img class="det" src="${x.det}" alt="" loading="lazy">
     <button class="fav" data-fav="${x.id}" aria-pressed="${saved.has(x.id)}" aria-label="Save ${x.name} in ${x.colour}">${heart}</button>
     <div class="sizes" aria-label="Add in size">${SIZES.map(s=>`<button data-add="${x.id}" data-size="${s}" aria-label="Add size ${s}">${s}</button>`).join('')}</div>
     <button class="quick" data-open="${x.id}" aria-label="Choose a size"></button></div>
@@ -514,7 +551,7 @@ function drawCart(){
   }
   stepOrder=false;
   d.innerHTML=`<div class="dh wide"><span>Cart (${count()})</span><button class="x" data-close aria-label="Close cart"></button></div>
-  <div class="lines">${cart.length?cart.map((l,i)=>{const x=P[l.id];return `<div class="li"><div class="th"><img src="${x.img}" alt=""></div><h4 class="wide">${x.name.replace('The ','')}</h4><div class="lp">${naira(x.price*l.q)}</div><small>${x.colour}</small>
+  <div class="lines">${cart.length?cart.map((l,i)=>{const x=P[l.id];return `<div class="li"><div class="th"><img src="${x.img}" alt=""${x.photo?' class="ph"':''}></div><h4 class="wide">${x.name.replace('The ','')}</h4><div class="lp">${naira(x.price*l.q)}</div><small>${x.colour}</small>
     <div class="ctl"><select id="size-${i}" data-line="${i}" aria-label="Size">${SIZES.map(s=>`<option${s===l.s?' selected':''}>${s}</option>`).join('')}</select>
     <div class="step"><button data-dec="${i}" aria-label="One less">&minus;</button><span>${l.q}</span><button data-inc="${i}" aria-label="One more">+</button></div><button class="rm" data-rm="${i}">Remove</button></div></div>`}).join(''):`<div class="empty"><div>Your cart is empty.</div><button class="btn" data-close data-goto="catalogue">Browse the catalogue</button></div>`}</div>
   ${cart.length?`<div class="df"><div class="sum"><span>Subtotal</span><b style="font-weight:500">${naira(total())}</b></div><div class="hint">Delivery is confirmed with you on WhatsApp.</div><button class="btn" id="toOrder">Order on WhatsApp</button></div>`:''}`;
@@ -525,8 +562,8 @@ function drawCart(){
 let cur=null,curS='M',curQ=1,curView='full',overlay=null,lastFocus=null;
 function drawSheet(){
   const x=P[cur],sibs=ALL.filter(o=>o.set===x.set);
-  $('sheet').innerHTML=`<div class="gal">${curView==='full'?`<img class="full" src="${x.img}" alt="${x.name} in ${x.colour}">`:`<img class="cover" src="${x.det}" alt="Detail of ${x.name}">`}
-    <div class="thumbs"><button data-view="full" aria-pressed="${curView==='full'}" aria-label="Full look" style="background-image:url(${x.img});background-size:contain;background-repeat:no-repeat"></button><button data-view="det" aria-pressed="${curView==='det'}" aria-label="Detail" style="background-image:url(${x.det})"></button></div></div>
+  $('sheet').innerHTML=`<div class="gal">${curView==='full'?`<img class="${x.photo?'cover ph':'full'}" src="${x.img}" alt="${x.name} in ${x.colour}">`:`<img class="cover" src="${x.det}" alt="Detail of ${x.name}">`}
+    <div class="thumbs"><button data-view="full" aria-pressed="${curView==='full'}" aria-label="Full look" style="background-image:url(${x.img});background-size:${x.photo?'cover':'contain'};background-repeat:no-repeat"></button><button data-view="det" aria-pressed="${curView==='det'}" aria-label="Detail" style="background-image:url(${x.det})"></button></div></div>
   <div class="side"><button class="x" data-close aria-label="Close"></button><h2 class="wide">${x.name}</h2><div class="price">${naira(x.price)}</div><p>${SETS[x.set].text}</p>
     <div><div class="lab wide">Colour: ${x.colour}${REAL.includes(x.id)?'':' (preview)'}</div><div class="swatches">${sibs.map(o=>`<button class="sw" style="--c:${o.hex}" data-swap="${o.id}" aria-pressed="${o.id===cur}" aria-label="${o.colour}" title="${o.colour}"></button>`).join('')}</div></div>
     <div><div class="lab wide">Size</div><div class="pick">${SIZES.map(s=>`<button class="s" data-s="${s}" aria-pressed="${s===curS}">${s}</button>`).join('')}</div></div>
@@ -567,6 +604,26 @@ document.addEventListener('change',e=>{
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('.pic')){e.preventDefault();openSheet(e.target.dataset.open)}});
 
 grid();$('count').textContent=count();
+/* women: cards and the film */
+$('wcards').innerHTML=WOMEN.map(x=>`<article class="wcard"><button class="frame" data-open="${x.id}" aria-label="View ${x.name}"><img src="${x.img}" alt="Model in ${x.name}" loading="lazy"><span class="badge wide">New</span></button>
+  <div class="dropinfo"><h3 class="wide">${x.name.replace('The ','')}</h3><div class="price">${naira(x.price)}</div>
+  <div class="acts"><button class="btn light" data-open="${x.id}">Choose size</button></div></div></article>`).join('');
+(()=>{
+  const v=$('wvid'),b=$('wplay'),film=v.parentNode;let held=calm,loaded=false;
+  film.style.backgroundImage=`url(${pic('women-poster')})`;v.poster=pic('women-poster');
+  const c=navigator.connection||{},lite=small||c.saveData||/2g/.test(c.effectiveType||'');
+  const set=p=>{b.classList.toggle('paused',p);b.setAttribute('aria-label',p?'Play film':'Pause film')};
+  const play=()=>{const q=v.play();q&&q.catch(()=>{})};
+  v.addEventListener('play',()=>set(false));v.addEventListener('pause',()=>set(true));set(true);
+  if(!('IntersectionObserver' in window)){v.src=lite?'video/women-720.mp4':'video/women-1080.mp4';return}
+  new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting&&!loaded){loaded=true;v.src=lite?'video/women-720.mp4':'video/women-1080.mp4';v.preload='auto'}
+  }),{rootMargin:'600px 0px'}).observe(v);
+  new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){if(!held)play()}else if(!v.paused)v.pause()
+  }),{threshold:.3}).observe(v);
+  b.onclick=()=>{if(v.paused){held=false;play()}else{held=true;v.pause()}};
+})();
 function loop(t){frame(t);requestAnimationFrame(loop)}
 size();requestAnimationFrame(loop);
 const ready=Promise.all(people.slice(0,2).map(m=>m.e.firstChild.decode().catch(()=>{})));
