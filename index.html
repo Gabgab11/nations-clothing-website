@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nations Clothing</title>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-nwBynJ699dPz/Uj/70kALFVx+a2TQHo2kR/P4PQlgHE='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-9JqZMHA4sIi1qCfmMuv5O0LnSRANn0TdkA/vvQBvOJE='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#fbf9f7">
 <meta name="description" content="Nations Clothing: unisex fashion made in Nigeria and shipped worldwide. Shop the new collection and order on WhatsApp.">
@@ -43,7 +43,7 @@ header{position:sticky;top:0;z-index:40;background:#fff;padding:calc(12*var(--u)
 .bag.bump i{transform:scale(1.35);background:var(--brown)}
 
 /* runway */
-.pin{position:relative;height:calc(100vh - var(--hh) + 2*var(--step));height:calc(100svh - var(--hh) + 2*var(--step))}
+.pin{position:relative;height:calc(100vh - var(--hh) + 3*var(--step));height:calc(100svh - var(--hh) + 3*var(--step))}
 .run{position:sticky;top:var(--hh);height:calc(100vh - var(--hh));height:calc(100svh - var(--hh));min-height:500px;display:grid;grid-template-columns:minmax(0,1fr) calc(372*var(--u));overflow:hidden}
 .stage{position:relative;overflow:hidden;min-width:0;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:none;
   background:linear-gradient(transparent 60%,rgba(255,255,255,.72) 100%),linear-gradient(90deg,#eef4f9 0%,#dfe9f3 38%,#e9f1f8 62%,#f4f8fb 100%)}
@@ -473,8 +473,8 @@ document.querySelectorAll('[data-a]').forEach(i=>i.src=pic(i.dataset.a));
 document.querySelectorAll('[data-price]').forEach(e=>e.textContent=naira(P[e.dataset.price].price));
 
 /* ---------- runway: everything is computed from p ---------- */
-/* laptops: the front look plus three behind it, spaced wider */
-const LAP={X:[1.2,.72,.45,.26,.11,.04,0],F:[1.14,.89,.775,.7,.65,.62,.6],H:[1.18,.832,.574,.436,.334,.258,.19],B:[0,0,2,5.500,10,14,18],O:[1,1,.96,.62,0,0,0],OL:[1,1,.9,.5,0,0,0]};
+/* laptops: four looks in view, the front one plus three behind */
+const LAP={X:[1.2,.73,.48,.31,.17,.07,0],F:[1.14,.89,.775,.705,.655,.62,.6],H:[1.18,.832,.574,.436,.334,.258,.19],B:[0,0,2,4.500,8,14,18],O:[1,1,1,.92,.7,0,0],OL:[1,1,.95,.8,.55,0,0]};
 /* phones: one look at a time; the next slides in from the right as the current slides out left */
 const PH={X:[-.55,.56,1.6,1.6,1.6,1.6,1.6],F:[.9,.9,.9,.9,.9,.9,.9],H:[.76,.76,.76,.76,.76,.76,.76],B:[0,0,0,0,0,0,0],O:[0,1,0,0,0,0,0]};
 PH.OL=PH.O;
@@ -542,7 +542,7 @@ function frame(now){
 const setTarget=t=>{target=t;offset=t-scrollLooks};
 const snap=()=>setTarget(Math.round(target));
 function readScroll(){
-  scrollLooks=clamp((scrollY-pinTop)/pinLen,0,1)*2;target=offset+scrollLooks;
+  scrollLooks=clamp((scrollY-pinTop)/pinLen,0,1)*3;target=offset+scrollLooks;
 }
 let scrollT=0;
 addEventListener('scroll',()=>{readScroll();clearTimeout(scrollT);scrollT=setTimeout(snap,150);tabs();$('totop').classList.toggle('on',scrollY>innerHeight*1.2)},{passive:true});
