@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nations Clothing</title>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-3Zjy57xzFrUTvQcDjaf1uMfuF8u9db4B3x2HXvtWHRM='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-ojsTeM2hiY1rMI2CBynGHkRwrtD67KFT+d042FMCZjA='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#fbf9f7">
 <meta name="description" content="Nations Clothing: unisex fashion made in Nigeria and shipped worldwide. Shop the new collection and order on WhatsApp.">
@@ -43,7 +43,7 @@ header{position:sticky;top:0;z-index:40;background:#fff;padding:calc(12*var(--u)
 .bag.bump i{transform:scale(1.35);background:var(--brown)}
 
 /* runway */
-.pin{position:relative;height:calc(100vh - var(--hh) + 5*var(--step));height:calc(100svh - var(--hh) + 5*var(--step))}
+.pin{position:relative;height:calc(100vh - var(--hh) + 2*var(--step));height:calc(100svh - var(--hh) + 2*var(--step))}
 .run{position:sticky;top:var(--hh);height:calc(100vh - var(--hh));height:calc(100svh - var(--hh));min-height:500px;display:grid;grid-template-columns:minmax(0,1fr) calc(372*var(--u));overflow:hidden}
 .stage{position:relative;overflow:hidden;min-width:0;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:none;
   background:linear-gradient(transparent 60%,rgba(255,255,255,.72) 100%),linear-gradient(90deg,#eef4f9 0%,#dfe9f3 38%,#e9f1f8 62%,#f4f8fb 100%)}
@@ -458,7 +458,9 @@ const P={};PRODUCTS.forEach(x=>{x.img=pic('ph-'+x.id);x.det=pic('dt-'+x.id);x.cu
 const ASK={lilac:{id:'lilac',name:'The Lilac Lace Look',k:1,ask:true},pink:{id:'pink',name:'The Pink Cord Look',k:1,ask:true}};
 const askLink=x=>'https://wa.me/2348147061094?text='+encodeURIComponent('Hello Nations Clothing, I would like the price and sizes of '+x.name.replace('The ','the ')+' from your new shoot.');
 Object.values(ASK).forEach(x=>x.cut=pic('look-'+x.id));
-const LOOKS=['regent','bloom','lilac','monarch','sterling','palette','pink','doxa'].map(id=>P[id]||ASK[id]);
+const LOOKS=(()=>{const a=['regent','bloom','lilac','monarch','sterling','palette','pink','doxa'];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}  /* new order on every visit */
+  return a.map(id=>P[id]||ASK[id])})();
 const openLook=L=>L.ask?window.open(askLink(L),'_blank','noopener,noreferrer'):openSheet(L.id);
 const WOMEN=['doxa','bloom','esther','wave'].map(id=>P[id]);
 const ALL=['doxa','bloom','regent','esther','monarch','palette','sterling','wave'].map(id=>P[id]);
@@ -538,7 +540,7 @@ function frame(now){
 const setTarget=t=>{target=t;offset=t-scrollLooks};
 const snap=()=>setTarget(Math.round(target));
 function readScroll(){
-  scrollLooks=clamp((scrollY-pinTop)/pinLen,0,1)*(N-1);target=offset+scrollLooks;
+  scrollLooks=clamp((scrollY-pinTop)/pinLen,0,1)*2;target=offset+scrollLooks;
 }
 let scrollT=0;
 addEventListener('scroll',()=>{readScroll();clearTimeout(scrollT);scrollT=setTimeout(snap,150);tabs();$('totop').classList.toggle('on',scrollY>innerHeight*1.2)},{passive:true});
