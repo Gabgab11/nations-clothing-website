@@ -609,18 +609,18 @@ $('wcards').innerHTML=WOMEN.map(x=>`<article class="wcard"><button class="frame"
   <div class="dropinfo"><h3 class="wide">${x.name.replace('The ','')}</h3><div class="price">${naira(x.price)}</div>
   <div class="acts"><button class="btn light" data-open="${x.id}">Choose size</button></div></div></article>`).join('');
 (()=>{
-  const v=$('wvid'),b=$('wplay'),film=v.parentNode;let held=calm,loaded=false;
+  const v=$('wvid'),b=$('wplay'),film=v.parentNode;let held=calm,loaded=false,vis=false;
   film.style.backgroundImage=`url(${pic('women-poster')})`;v.poster=pic('women-poster');
   const c=navigator.connection||{},lite=small||c.saveData||/2g/.test(c.effectiveType||'');
   const set=p=>{b.classList.toggle('paused',p);b.setAttribute('aria-label',p?'Play film':'Pause film')};
   const play=()=>{const q=v.play();q&&q.catch(()=>{})};
-  v.addEventListener('play',()=>set(false));v.addEventListener('pause',()=>set(true));set(true);
+  v.addEventListener('play',()=>set(false));v.addEventListener('canplay',()=>{if(vis&&!held&&v.paused)play()});v.addEventListener('pause',()=>set(true));set(true);
   if(!('IntersectionObserver' in window)){v.src=lite?'video/women-720.mp4':'video/women-1080.mp4';return}
   new IntersectionObserver(es=>es.forEach(e=>{
     if(e.isIntersecting&&!loaded){loaded=true;v.src=lite?'video/women-720.mp4':'video/women-1080.mp4';v.preload='auto'}
   }),{rootMargin:'600px 0px'}).observe(v);
   new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting){if(!held)play()}else if(!v.paused)v.pause()
+    vis=e.isIntersecting;if(vis){if(!held&&v.readyState>2)play()}else if(!v.paused)v.pause()
   }),{threshold:.3}).observe(v);
   b.onclick=()=>{if(v.paused){held=false;play()}else{held=true;v.pause()}};
 })();
