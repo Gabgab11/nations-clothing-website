@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nations Clothing</title>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-9JqZMHA4sIi1qCfmMuv5O0LnSRANn0TdkA/vvQBvOJE='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MgTjJKU50s24/d6ro3hsUa9TI83ZeokAVEFuC4wlJNc='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#fbf9f7">
 <meta name="description" content="Nations Clothing: unisex fashion made in Nigeria and shipped worldwide. Shop the new collection and order on WhatsApp.">
@@ -177,6 +177,32 @@ header{position:sticky;top:0;z-index:40;background:#fff;padding:calc(12*var(--u)
 .side .for{font-size:13.5px;color:var(--mid)}.side .note{font-size:13.5px;color:var(--brown)}
 .sizes{grid-template-columns:repeat(auto-fill,minmax(38px,1fr))!important}
 
+/* size check and policy */
+.chartwrap{overflow-x:auto;border:1px solid var(--line);background:#fff}
+table.chart{width:100%;border-collapse:collapse;font:400 13px/1.2 var(--text);font-variant-numeric:tabular-nums;text-align:center;color:var(--ink)}
+.chart thead th{background:#6b3a1f;color:#fff;font:500 11px/1.25 var(--text);padding:9px 6px;letter-spacing:.02em}
+.chart td,.chart tbody th{padding:8px 6px;border-top:1px solid var(--line);font-weight:400}
+.chart tbody th{font-weight:600}
+.chart tr[data-s]{cursor:pointer}.chart tr[data-s]:hover td,.chart tr[data-s]:hover th{background:#faf3ee}
+.chart tr[aria-selected=true] td,.chart tr[aria-selected=true] th{background:#f3e3d6;color:#6b3a1f;font-weight:600}
+.side .sel{font-size:13.5px;line-height:1.5;color:#4c5769;background:#faf6f2;padding:10px 12px}.side .sel b{color:#6b3a1f;font-weight:600}
+.lm{font-weight:400;color:var(--mid);font-size:12px}.cols button[aria-pressed=true] .lm{color:#d6dbe3}
+.agree{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;cursor:pointer;color:var(--ink)}
+.agree input{width:18px;height:18px;margin:1px 0 0;accent-color:#6b3a1f;flex:none}
+.btn[disabled],.btn.off{opacity:.38;pointer-events:none}
+.backlink{align-self:flex-start;font-size:13px;color:var(--mid);text-decoration:underline;text-underline-offset:3px}
+.guide{margin-left:10px;font:400 12px var(--text);letter-spacing:0;text-transform:none;color:#6b3a1f;text-decoration:underline;text-underline-offset:3px}
+.sizes.one{grid-template-columns:1fr!important}.sizes.one button{font:400 9px var(--wide);text-transform:uppercase;letter-spacing:.12em}
+.policy{padding:22px 0 8px}
+.ph1{font-size:30px;line-height:1;color:#6b3a1f;letter-spacing:.06em}
+.ph2{font:italic 400 26px/1 Georgia,"Times New Roman",serif;color:#b08a6a;margin:-12px 0 0 74px}
+.policy ol{list-style:none;counter-reset:p;display:grid;gap:14px;margin-top:20px}
+.policy li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;font-size:14px;line-height:1.55;color:#4c5769;counter-increment:p}
+.policy li:before{content:counter(p,decimal-leading-zero);font:400 10px/2 var(--wide);color:#b08a6a}
+.policy li b{display:block;color:var(--ink);font:400 10px/1.9 var(--wide);text-transform:uppercase;letter-spacing:.12em}
+.policy .thanks{margin-top:18px;font:italic 400 15px Georgia,"Times New Roman",serif;color:#6b3a1f}
+.house .policy{padding-top:0}.dpad{padding:0 0 22px;display:grid;gap:10px}.dpad>p{font-size:15px;line-height:1.6;color:#4c5769;padding:0}
+
 /* back to top */
 .totop{position:fixed;z-index:45;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));width:40px;height:40px;border-radius:50%;
   background:rgba(255,255,255,.92);color:var(--ink);box-shadow:0 2px 12px rgba(20,26,38,.16),inset 0 0 0 1px rgba(20,26,38,.08);display:grid;place-items:center;
@@ -304,7 +330,7 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
   .film{height:auto;width:100%;max-height:82vh;max-height:82svh;margin-inline:auto}
   .wcards{gap:12px;margin-top:28px}.wcard .dropinfo{grid-template-columns:1fr}.wcard .dropinfo .price{grid-column:1;grid-row:auto}.wcard .acts .btn{width:100%;padding:0 10px}
   .sheet{top:auto;left:0;bottom:0;width:100%;max-height:92vh;max-height:92svh;grid-template-columns:1fr;transform:translateY(30px)}
-  .sheet.on{transform:none}.gal{min-height:0;height:46svh}
+  .sheet.on{transform:none}.sheet.checking .gal{display:none}.gal{min-height:0;height:46svh}
   .side{padding:22px 16px calc(18px + env(safe-area-inset-bottom,0px))}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms!important}}
@@ -405,10 +431,11 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
     <div class="facts"><div><b>Unisex fashion brand.</b> Established 2020.</div><div>WhatsApp: <a class="walink" href="https://wa.me/2348147061094" target="_blank" rel="noopener noreferrer">+234 814 706 1094</a></div><div>Made in Nigeria. Ships worldwide.</div><div>Demurin Street, Ketu, Lagos.</div></div>
   </div>
   <div>
-    <div class="eyebrow wide">The House</div><h2 class="h2 wide" style="margin-bottom:26px">How ordering works</h2>
-    <details open><summary>Order</summary><p>Build your cart here, then tap Order on WhatsApp. Your order arrives in our chat, ready to send. We confirm your size and delivery in the chat before you pay.</p></details>
-    <details><summary>Size guide</summary><p>Women's pieces come in sizes 4 to 22, depending on the style. Men's sets come in S to XXL. Some styles cost a little more from size 20. Not sure of your size? Ask us on WhatsApp before you order.</p></details>
-    <details><summary>Delivery</summary><p>We ship from Lagos to anywhere in the world. Delivery time and cost depend on where you are, and we confirm both in the chat.</p></details>
+    <div class="eyebrow wide">The House</div><h2 class="h2 wide" style="margin-bottom:26px">Ordering and sizes</h2>
+    <details open><summary>How to order</summary><p>Choose your pieces, then tap Order on WhatsApp. Your order arrives in our chat, ready to send, and we confirm your size and delivery before you pay.</p></details>
+    <details><summary>Order policy</summary><div id="housePolicy" class="dpad"></div></details>
+    <details><summary>Women's size guide</summary><div id="houseSizes" class="dpad"></div></details>
+    <details><summary>Men's sizes</summary><p>Men's sets come in S to XXL, depending on the style. Not sure of your size? Ask us on WhatsApp before you order.</p></details>
   </div>
 </section>
 <footer>
@@ -435,17 +462,17 @@ const NUM=(a,b)=>{const o=[];for(let n=a;n<=b;n+=2)o.push(String(n));return o};
 const PRODUCTS=[
  {id:'regent',name:'The Regent Set',g:'men',price:60000,sizes:['M','L','XL'],colours:['Black'],k:1,
   text:'A relaxed, flowing silhouette in premium textured fabric, refined with contrast patterned details on the sleeves and pocket. Effortless in style, for both formal and celebratory occasions.'},
- {id:'bloom',name:'The Bloom Dress',g:'women',price:55000,big:58000,sizes:[...NUM(4,18),'20+'],colours:['Orange / cream','Red / cream','Baby pink / deep pink','Black / white','Olive green / yellow','Blue / sky blue'],k:1,
+ {id:'bloom',name:'The Bloom Dress',g:'women',price:55000,big:58000,sizes:NUM(4,24),colours:['Orange / cream','Red / cream','Baby pink / deep pink','Black / white','Olive green / yellow','Blue / sky blue'],k:1,
   text:'Designed for Queens who love to stand out: a structured bodice, a voluminous flared skirt and dramatic ruffles around the neckline and shoulders, finished with delicate floral embellishments.',
   for:'Birthdays, weddings, garden parties, bridal showers'},
  {id:'monarch',name:'The Monarch Set',g:'men',price:55000,sizes:['M','L','XL'],colours:['Sky Blue','Black','White'],k:.8,
-  text:'For the Kings who love to look good without doing too much. A beautifully crafted native piece that brings together comfort, class and effortless style.',note:'Delivery in 3 to 7 working days.'},
+  text:'For the Kings who love to look good without doing too much. A beautifully crafted native piece that brings together comfort, class and effortless style.',note:'Processed within 3 to 7 working days.'},
  {id:'sterling',name:'The Sterling Set',g:'men',price:55000,sizes:['S','M','L','XL','XXL'],colours:['Black','Brown','Wine','White','Navy Blue'],k:1,
   text:'A structured short-sleeve shirt in warm tan with four contrasting chocolate cargo pockets, paired with tailored straight-leg trousers in rich chocolate brown.',
   for:'Wedding receptions, birthdays, dinner dates, church'},
- {id:'palette',name:'The Palette Set',g:'women',price:55000,big:60000,sizes:[...NUM(8,18),'20+'],colours:['Fuchsia Pink','Green','Blue'],k:1,
+ {id:'palette',name:'The Palette Set',g:'women',price:55000,big:60000,sizes:NUM(8,24),colours:['Fuchsia Pink','Green','Blue'],k:1,
   text:'An oversized two-piece set that blends comfort, elegance and effortless style.',for:'Casual outings, brunch dates, travel, relaxed gatherings'},
- {id:'doxa',name:'The Doxa Bubu',g:'women',price:65000,big:73000,sizes:[...NUM(4,18),'20+'],colours:['Green','Blue','Brown','Silver','Red'],k:1,
+ {id:'doxa',name:'The Doxa Bubu',g:'women',price:65000,big:73000,sizes:NUM(4,24),colours:['Green','Blue','Brown','Silver','Red'],k:1,
   text:'A blend of sophistication, comfort and timeless African elegance: rich, vibrant colour, a graceful silhouette and exquisite finishing, for Queens who love to make an effortless statement.',
   for:'Weddings, church, birthdays, cultural events'},
  {id:'esther',name:'The Esther Dress',g:'women',price:55000,sizes:NUM(4,22),colours:['Wine','Black','Brown','White','Navy Blue'],
@@ -464,7 +491,19 @@ const LOOKS=(()=>{const a=['regent','bloom','lilac','monarch','sterling','palett
 const openLook=L=>L.ask?window.open(askLink(L),'_blank','noopener,noreferrer'):openSheet(L.id);
 const WOMEN=['doxa','bloom','esther','wave'].map(id=>P[id]);
 const ALL=['doxa','bloom','regent','esther','monarch','palette','sterling','wave'].map(id=>P[id]);
-const priceOf=(id,s)=>s==='20+'&&P[id].big?P[id].big:P[id].price;
+const priceOf=(id,s)=>P[id].big&&+s>=20?P[id].big:P[id].price;
+/* women's size chart, inches: size, bust, waist, hip, thigh, round sleeve */
+const CHART=[[4,30,23,36,20,12],[6,32,25,37,22,13],[8,34,27,38,24,14],[10,36,29,40,26,14],[12,38,31,42,28,15],[14,40,35,45,30,16],[16,42,35,48,32,16.5],[18,44,37,51,34,17],[20,46,42,56,36,17.5],[22,52,45,57,40,18],[24,56,48,60,44,20]];
+const LENS=[['Petite',58,40],['Regular',60,44],['Tall',64,47]];
+const POLICY=[['Payment','Full payment is required before orders are processed. We do not accept payment on delivery.'],
+ ['Processing time','Orders are processed within 3 to 7 working days.'],
+ ['Delivery','We deliver nationwide and internationally. International orders are mainly shipped by cargo. Delivery fees depend on the destination.'],
+ ['Returns and exchanges','All sales are final. Returns or exchanges are only considered for damaged, defective or incorrect items reported within 24 hours of delivery.'],
+ ['Order cancellation','Orders cannot be cancelled once processing has started.'],
+ ['Size and colour','Please confirm your size, style and colour before payment. Slight colour differences may occur because of lighting and screens.']];
+const policyHTML=()=>`<div class="policy"><div class="ph1 wide">Order</div><div class="ph2">policy</div><ol>${POLICY.map(([t,d])=>`<li><span><b>${t}</b>${d}</span></li>`).join('')}</ol><p class="thanks">Thank you for shopping with Nations Clothing Fashion House.</p></div>`;
+const chartHTML=(sizes,sel)=>`<div class="chartwrap"><table class="chart"><thead><tr><th scope="col">UK size</th><th scope="col">Bust</th><th scope="col">Waist</th><th scope="col">Hip</th><th scope="col">Thigh</th><th scope="col">Round sleeve</th></tr></thead><tbody>${CHART.filter(r=>!sizes||sizes.includes(String(r[0]))).map(r=>`<tr${sizes?` data-s="${r[0]}" aria-selected="${String(r[0])===sel}"`:''}>${r.map((v,i)=>i?`<td>${v}</td>`:`<th scope="row">${v}</th>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+const lensHTML=()=>`<div class="chartwrap"><table class="chart"><thead><tr><th scope="col">Length</th><th scope="col">Full length</th><th scope="col">Trouser length</th></tr></thead><tbody>${LENS.map(r=>`<tr>${r.map((v,i)=>i?`<td>${v}</td>`:`<th scope="row">${v}</th>`).join('')}</tr>`).join('')}</tbody></table></div>`;
 const defSize=x=>x.sizes[Math.min(2,x.sizes.length-1)];
 const naira=n=>'₦'+n.toLocaleString('en-NG');
 const $=id=>document.getElementById(id),calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -603,7 +642,7 @@ function grid(){
   $('grid').innerHTML=list.map(x=>`<article class="tile"><div class="pic" data-open="${x.id}" role="button" tabindex="0" aria-label="View ${x.name}">
     <img class="cover" src="${x.img}" alt="${x.name}" loading="lazy"><img class="det" src="${x.det}" alt="" loading="lazy">
     <button class="fav" data-fav="${x.id}" aria-pressed="${saved.has(x.id)}" aria-label="Save ${x.name}">${heart}</button>
-    <div class="sizes" aria-label="Add in size">${x.sizes.map(s=>`<button data-add="${x.id}" data-size="${s}" aria-label="Add size ${s}">${s}</button>`).join('')}</div>
+    ${x.g==='women'?`<div class="sizes one"><button data-open="${x.id}">Check size and add</button></div>`:`<div class="sizes" aria-label="Add in size">${x.sizes.map(s=>`<button data-add="${x.id}" data-size="${s}" aria-label="Add size ${s}">${s}</button>`).join('')}</div>`}
     <button class="quick" data-open="${x.id}" aria-label="Choose a size"></button></div>
     <div class="tinfo"><h3 class="wide">${x.name.replace('The ','')}</h3><div class="price">${naira(x.price)}</div><small>${range(x)} · ${x.colours.length} colour${x.colours.length>1?'s':''}</small></div></article>`).join('')
     ||`<div class="none">Nothing saved yet. <button style="text-decoration:underline" data-reset>Show everything</button></div>`;
@@ -612,11 +651,11 @@ function grid(){
 function syncFav(){document.querySelectorAll('[data-fav]').forEach(b=>b.setAttribute('aria-pressed',saved.has(b.dataset.fav)));$('saved').textContent=saved.size}
 
 /* ---------- cart ---------- */
-let cart=load('nc-cart2',[]).filter(l=>l&&P[l.id]&&P[l.id].sizes.includes(l.s)&&P[l.id].colours.includes(l.c)&&Number.isInteger(l.q)&&l.q>0&&l.q<100);
+let cart=load('nc-cart2',[]).filter(l=>l&&P[l.id]&&P[l.id].sizes.includes(l.s)&&P[l.id].colours.includes(l.c)&&Number.isInteger(l.q)&&l.q>0&&l.q<100&&(l.len===undefined||LENS.some(r=>r[0]===l.len)));
 const count=()=>cart.reduce((n,l)=>n+l.q,0),total=()=>cart.reduce((n,l)=>n+l.q*priceOf(l.id,l.s),0);
-function addItem(id,size,q=1,quiet,colour){
+function addItem(id,size,q=1,quiet,colour,len){
   const x=P[id];size=size||defSize(x);colour=colour||x.colour;
-  const l=cart.find(o=>o.id===id&&o.s===size&&o.c===colour);if(l)l.q+=q;else cart.push({id,s:size,c:colour,q});
+  const l=cart.find(o=>o.id===id&&o.s===size&&o.c===colour&&o.len===len);if(l)l.q+=q;else cart.push(len?{id,s:size,c:colour,q,len}:{id,s:size,c:colour,q});
   saveCart();const b=$('cartBtn');b.classList.add('bump');setTimeout(()=>b.classList.remove('bump'),300);
   if(!quiet)toast(`${x.name}, ${colour}, size ${size} added`);
 }
@@ -624,44 +663,61 @@ function saveCart(){store('nc-cart2',cart);$('count').textContent=count();if(ove
 let stepOrder=false;
 const waLink=()=>'https://wa.me/2348147061094?text='+encodeURIComponent(orderText());
 function orderText(){
-  return 'Hello Nations Clothing, I would like to order:\n\n'+cart.map(l=>`${l.q} x ${P[l.id].name} (${l.c}), size ${l.s}, ${naira(priceOf(l.id,l.s)*l.q)}`).join('\n')+`\n\nTotal: ${naira(total())}\nPlease confirm sizing and delivery.`;
+  return 'Hello Nations Clothing, I would like to order:\n\n'+cart.map(l=>`${l.q} x ${P[l.id].name} (${l.c}), size ${l.s}${l.len?', '+l.len+' length':''}, ${naira(priceOf(l.id,l.s)*l.q)}`).join('\n')+`\n\nTotal: ${naira(total())}\nI have read and agree to the order policy.\nPlease confirm sizing and delivery.`;
 }
 function drawCart(){
   const d=$('drawer');
   if(stepOrder&&cart.length){
-    d.innerHTML=`<div class="dh wide"><span>Your order</span><button class="x" data-close aria-label="Close cart"></button></div>
-    <div class="lines"><div class="hint" style="margin-top:18px">This message is sent to Nations Clothing on WhatsApp.</div><div class="preview" id="msg"></div></div>
-    <div class="df"><a class="btn wa" href="${waLink()}" target="_blank" rel="noopener noreferrer">Send on WhatsApp</a><button class="btn ghost" id="copy" style="color:var(--ink)">Copy message</button><button class="btn ghost" id="back" style="color:var(--ink)">Back to cart</button></div>`;
-    $('msg').textContent=orderText();
+    d.innerHTML=`<div class="dh wide"><span>Before you order</span><button class="x" data-close aria-label="Close cart"></button></div>
+    <div class="lines">${policyHTML()}</div>
+    <div class="df"><label class="agree"><input type="checkbox" id="polok"> I have read and agree to the order policy</label>
+    <a class="btn wa off" id="sendWa" href="${waLink()}" target="_blank" rel="noopener noreferrer" aria-disabled="true">Send order on WhatsApp</a><button class="btn ghost" id="back" style="color:var(--ink)">Back to cart</button></div>`;
+    const ok=$('polok'),go=$('sendWa');
+    ok.onchange=()=>{go.classList.toggle('off',!ok.checked);go.setAttribute('aria-disabled',!ok.checked)};
+    go.onclick=e=>{if(!ok.checked)e.preventDefault()};
     $('back').onclick=()=>{stepOrder=false;drawCart()};
-    $('copy').onclick=async e=>{try{await navigator.clipboard.writeText(orderText());e.target.textContent='Copied'}catch(x){const r=document.createRange();r.selectNodeContents($('msg'));const s=getSelection();s.removeAllRanges();s.addRange(r);e.target.textContent='Selected. Copy it now'}};
     return;
   }
   stepOrder=false;
   d.innerHTML=`<div class="dh wide"><span>Cart (${count()})</span><button class="x" data-close aria-label="Close cart"></button></div>
-  <div class="lines">${cart.length?cart.map((l,i)=>{const x=P[l.id];return `<div class="li"><div class="th"><img src="${x.img}" alt="" class="ph"></div><h4 class="wide">${x.name.replace('The ','')}</h4><div class="lp">${naira(priceOf(l.id,l.s)*l.q)}</div><small>${l.c}</small>
+  <div class="lines">${cart.length?cart.map((l,i)=>{const x=P[l.id];return `<div class="li"><div class="th"><img src="${x.img}" alt="" class="ph"></div><h4 class="wide">${x.name.replace('The ','')}</h4><div class="lp">${naira(priceOf(l.id,l.s)*l.q)}</div><small>${l.c}${l.len?' · '+l.len+' length':''}</small>
     <div class="ctl"><select id="size-${i}" data-line="${i}" aria-label="Size">${x.sizes.map(s=>`<option${s===l.s?' selected':''}>${s}</option>`).join('')}</select>
     <div class="step"><button data-dec="${i}" aria-label="One less">&minus;</button><span>${l.q}</span><button data-inc="${i}" aria-label="One more">+</button></div><button class="rm" data-rm="${i}">Remove</button></div></div>`}).join(''):`<div class="empty"><div>Your cart is empty.</div><button class="btn" data-close data-goto="catalogue">Browse the catalogue</button></div>`}</div>
-  ${cart.length?`<div class="df"><div class="sum"><span>Subtotal</span><b style="font-weight:500">${naira(total())}</b></div><div class="hint">We confirm size and delivery with you on WhatsApp.</div><a class="btn wa" id="toOrder" href="${waLink()}" target="_blank" rel="noopener noreferrer">Order on WhatsApp</a></div>`:''}`;
-  
+  ${cart.length?`<div class="df"><div class="sum"><span>Subtotal</span><b style="font-weight:500">${naira(total())}</b></div><div class="hint">We confirm size and delivery with you on WhatsApp.</div><button class="btn wa" id="toOrder">Order on WhatsApp</button></div>`:''}`;
+  const t=$('toOrder');if(t)t.onclick=()=>{stepOrder=true;drawCart();d.querySelector('.lines').scrollTop=0};
 }
 
 /* ---------- product sheet ---------- */
-let cur=null,curS='',curC='',curQ=1,curView='full',overlay=null,lastFocus=null;
+let cur=null,curS='',curC='',curQ=1,curView='full',curStep='pick',curL='',overlay=null,lastFocus=null;
 function drawSheet(){
-  const x=P[cur],pr=priceOf(cur,curS);
+  const x=P[cur],pr=priceOf(cur,curS),women=x.g==='women';
+  const row=CHART.find(r=>String(r[0])===curS);
+  const check=women&&curStep==='check'?`<div class="side"><button class="x" data-close aria-label="Close"></button>
+    <button class="backlink" data-back>&lsaquo; Back to ${x.name.replace('The ','')}</button>
+    <h2 class="wide">Check your size</h2><p>Compare your measurements with the chart. Tap a row to change your size. All measurements are in inches.</p>
+    ${chartHTML(x.sizes,curS)}
+    ${row?`<div class="sel"><b>Size ${curS}:</b> bust ${row[1]}, waist ${row[2]}, hip ${row[3]}, thigh ${row[4]}, round sleeve ${row[5]}</div>`:''}
+    <div><div class="lab wide">Your length</div><div class="cols">${LENS.map(([n,f,t])=>`<button data-l="${n}" aria-pressed="${n===curL}">${n} <span class="lm">${f}" / ${t}"</span></button>`).join('')}</div><div class="hint" style="margin-top:8px">Full length / trouser length.</div></div>
+    <label class="agree"><input type="checkbox" id="szok"> I have checked my measurements against the chart</label>
+    <button class="btn" id="confirmAdd" disabled>${curL?`Add size ${curS}, ${curL} · ${naira(pr*curQ)}`:'Choose your length'}</button></div>`:'';
   $('sheet').innerHTML=`<div class="gal">${curView==='full'?`<img class="cover ph" src="${x.img}" alt="${x.name}">`:`<img class="cover" src="${x.det}" alt="Another view of ${x.name}">`}
     <div class="thumbs"><button data-view="full" aria-pressed="${curView==='full'}" aria-label="Main photo" style="background-image:url(${x.img})"></button><button data-view="det" aria-pressed="${curView==='det'}" aria-label="Second photo" style="background-image:url(${x.det})"></button></div></div>
-  <div class="side"><button class="x" data-close aria-label="Close"></button><h2 class="wide">${x.name}</h2><div class="price">${naira(pr)}${x.big?`<span class="for"> · size 20+ ${naira(x.big)}</span>`:''}</div><p>${x.text}</p>
+  <div class="side"><button class="x" data-close aria-label="Close"></button><h2 class="wide">${x.name}</h2><div class="price">${naira(pr)}${x.big?`<span class="for"> · size 20 and above ${naira(x.big)}</span>`:''}</div><p>${x.text}</p>
     ${x.for?`<div class="for">Perfect for: ${x.for}</div>`:''}
     <div><div class="lab wide">Colour: ${curC}</div><div class="cols">${x.colours.map(c=>`<button data-c="${c}" aria-pressed="${c===curC}">${c}</button>`).join('')}</div></div>
-    <div><div class="lab wide">Size</div><div class="pick">${x.sizes.map(s=>`<button class="s" data-s="${s}" aria-pressed="${s===curS}">${s}</button>`).join('')}</div></div>
+    <div><div class="lab wide">Size${women?' <button class="guide" data-guide>Size guide</button>':''}</div><div class="pick">${x.sizes.map(s=>`<button class="s" data-s="${s}" aria-pressed="${s===curS}">${s}</button>`).join('')}</div></div>
     ${x.note?`<div class="note">${x.note}</div>`:''}
-    <div class="buy"><div class="step"><button data-qty="-1" aria-label="One less">&minus;</button><span>${curQ}</span><button data-qty="1" aria-label="One more">+</button></div><button class="btn" id="addNow">Add to cart · ${naira(pr*curQ)}</button></div></div>`;
-  $('addNow').onclick=()=>{addItem(cur,curS,curQ,true,curC);closeAll(true);openCart()};
+    <div class="buy"><div class="step"><button data-qty="-1" aria-label="One less">&minus;</button><span>${curQ}</span><button data-qty="1" aria-label="One more">+</button></div><button class="btn" id="addNow">${women?'Check size and add':'Add to cart · '+naira(pr*curQ)}</button></div></div>`;
+  $('sheet').classList.toggle('checking',!!check);
+  if(check){const s=$('sheet');s.querySelector('.side').outerHTML=check;
+    const ok=$('szok'),go=$('confirmAdd');ok.checked=!!drawSheet.ok;go.disabled=!(ok.checked&&curL);
+    ok.onchange=()=>{drawSheet.ok=ok.checked;go.disabled=!(ok.checked&&curL)};
+    go.onclick=()=>{addItem(cur,curS,curQ,true,curC,curL);curStep='pick';closeAll(true);openCart()};
+    s.querySelector('.side').scrollTop=0;return}
+  $('addNow').onclick=()=>{if(women){curStep='check';drawSheet();$('sheet').scrollTop=0;return}addItem(cur,curS,curQ,true,curC);closeAll(true);openCart()};
 }
 function show(el){overlay=el;$('veil').classList.add('on');document.body.classList.add('lock')}
-function openSheet(id,keep){if(!keep){lastFocus=document.activeElement;curS=defSize(P[id]);curC=P[id].colour;curQ=1;curView='full'}cur=id;drawSheet();$('sheet').classList.add('on');show('sheet');const c=$('sheet').querySelector('.x');c&&c.focus({preventScroll:true})}
+function openSheet(id,keep){if(!keep){lastFocus=document.activeElement;curS=defSize(P[id]);curC=P[id].colour;curQ=1;curView='full';curStep='pick';curL='';drawSheet.ok=false}cur=id;drawSheet();$('sheet').classList.add('on');show('sheet');const c=$('sheet').querySelector('.x');c&&c.focus({preventScroll:true})}
 function openCart(){$('toast').classList.remove('on');lastFocus=lastFocus||document.activeElement;drawCart();$('drawer').classList.add('on');show('cart');const c=$('drawer').querySelector('.x');c&&c.focus({preventScroll:true})}
 function closeAll(keep){if(!overlay)return;overlay=null;stepOrder=false;$('sheet').classList.remove('on');$('drawer').classList.remove('on');if(!keep){$('veil').classList.remove('on');document.body.classList.remove('lock');lastFocus&&lastFocus.focus&&lastFocus.focus({preventScroll:true});lastFocus=null}}
 $('veil').onclick=()=>closeAll();$('cartBtn').onclick=openCart;
@@ -677,6 +733,9 @@ document.addEventListener('click',e=>{
   if(b=c('[data-c]')){curC=b.dataset.c;drawSheet();return}
   if(b=c('[data-view]')){curView=b.dataset.view;drawSheet();return}
   if(b=c('[data-s]')){curS=b.dataset.s;drawSheet();return}
+  if(b=c('[data-l]')){curL=b.dataset.l;drawSheet();return}
+  if(b=c('[data-guide]')){curStep='check';drawSheet();return}
+  if(b=c('[data-back]')){curStep='pick';drawSheet();return}
   if(b=c('[data-qty]')){curQ=Math.max(1,curQ+ +b.dataset.qty);drawSheet();return}
   if(b=c('[data-inc]')){cart[+b.dataset.inc].q++;saveCart();return}
   if(b=c('[data-dec]')){const i=+b.dataset.dec;if(--cart[i].q<1)cart.splice(i,1);saveCart();return}
@@ -693,6 +752,8 @@ document.addEventListener('change',e=>{
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('.pic')){e.preventDefault();openSheet(e.target.dataset.open)}});
 
 grid();$('count').textContent=count();
+$('housePolicy').innerHTML=policyHTML();
+$('houseSizes').innerHTML=`<p>All measurements are in inches. Some styles cost a little more from size 20.</p>${chartHTML(null)}<div style="height:14px"></div>${lensHTML()}`;
 /* women: cards and the film */
 $('wcards').innerHTML=WOMEN.map(x=>`<article class="wcard"><button class="frame" data-open="${x.id}" aria-label="View ${x.name}"><img src="${x.img}" alt="${x.name}" loading="lazy"><span class="badge wide">New</span></button>
   <div class="dropinfo"><h3 class="wide">${x.name.replace('The ','')}</h3><div class="price">${naira(x.price)}</div>
