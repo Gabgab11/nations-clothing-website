@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nations Clothing</title>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-MgTjJKU50s24/d6ro3hsUa9TI83ZeokAVEFuC4wlJNc='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-svJb6WicQxrwixrp5GnGyssu1D1dJb5dbCYMmgUO65c='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#fbf9f7">
 <meta name="description" content="Nations Clothing: unisex fashion made in Nigeria and shipped worldwide. Shop the new collection and order on WhatsApp.">
@@ -203,6 +203,9 @@ table.chart{width:100%;border-collapse:collapse;font:400 13px/1.2 var(--text);fo
 .policy .thanks{margin-top:18px;font:italic 400 15px Georgia,"Times New Roman",serif;color:#6b3a1f}
 .house .policy{padding-top:0}.dpad{padding:0 0 22px;display:grid;gap:10px}.dpad>p{font-size:15px;line-height:1.6;color:#4c5769;padding:0}
 
+.how{list-style:none;display:grid;gap:8px;font-size:13.5px;line-height:1.5;color:#4c5769;padding:10px 0 0}.how b{color:var(--ink);font-weight:600;margin-right:4px}
+.howto{border:0!important}.howto summary{padding:4px 0;font-size:10px}
+
 /* back to top */
 .totop{position:fixed;z-index:45;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));width:40px;height:40px;border-radius:50%;
   background:rgba(255,255,255,.92);color:var(--ink);box-shadow:0 2px 12px rgba(20,26,38,.16),inset 0 0 0 1px rgba(20,26,38,.08);display:grid;place-items:center;
@@ -224,6 +227,25 @@ details[open] summary:after{transform:rotate(45deg)}
 details p{padding:0 0 22px;max-width:60ch;font-size:15px;line-height:1.65;color:#4c5769}
 .note{color:var(--brown)}
 .walink{color:var(--brown);text-decoration:underline;text-underline-offset:3px}
+/* brown theme: sections take the Women colour; runway stays white */
+:root{--bw:#2a1711;--bw2:#331d15;--cream:#f4e7dc;--cream2:#cdb6a6;--ember:#e38c5c;--bline:rgba(244,231,220,.16)}
+.new,.cat,.look2,.house{background:var(--bw);color:var(--cream)}
+.cat,.house{background:var(--bw2)}
+.new .eyebrow,.cat .eyebrow,.look2 .eyebrow,.house .eyebrow{color:var(--ember)}
+.new .dropinfo p,.look2 .lead,.cat .count,.tinfo small{color:var(--cream2)}
+.new .frame{background:#3a2219}
+.filters{border-color:var(--bline)}
+.chip{color:var(--cream2)}.chip:hover{color:var(--cream)}.chip[aria-pressed=true]{background:var(--cream);color:var(--bw)}
+.lbgrid figure{background:#3a2219}
+.house details{border-color:var(--bline)!important}.house details p,.house .dpad>p,.house .how{color:var(--cream2)}
+.house .how b{color:var(--cream)}
+.house .walink,.look2 .walink{color:var(--ember)}
+.house .policy li{color:var(--cream2)}.house .policy li b{color:var(--cream)}.house .policy .thanks{color:var(--ember)}
+.house .chartwrap{border-color:var(--bline)}
+.house svg.mark .lg-c{fill:#8a5130}.house svg.mark .lg-t,.house svg.mark .lg-e{fill:#cdb6a6}
+.btn.light{background:var(--cream);color:var(--bw)}.btn.light:hover{background:var(--ember)}
+.new .btn.ghost:hover{background:var(--cream);color:var(--bw);box-shadow:inset 0 0 0 1px var(--cream)}
+footer{background:#1d0f0b!important;color:var(--cream2)!important}footer a{color:var(--cream)!important;border-color:rgba(244,231,220,.35)!important}
 footer{background:var(--night);color:#a9b8cc;padding:30px var(--gut);display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-between;font-size:13px;line-height:1.5}
 footer a{color:#eaf1f8;border-bottom:1px solid rgba(234,241,248,.35)}
 
@@ -380,13 +402,13 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
       <button class="frame" data-open="regent" aria-label="View The Regent Set"><img loading="lazy" data-a="hero-regent" alt="Model in the black Regent Set, standing in profile against a blue floral backdrop"><span class="badge wide">New</span></button>
       <div class="dropinfo"><h3 class="wide">The Regent Set</h3><div class="price" data-price="regent"></div>
         <p>A relaxed, flowing silhouette in premium textured fabric, refined with worked panels at the sleeve and pocket.</p>
-        <div class="acts"><button class="btn light" data-add="regent">Add to cart</button><button class="btn ghost" data-open="regent">View the set</button></div></div>
+        <div class="acts"><button class="btn light" data-open="regent">Choose size</button><button class="btn ghost" data-open="regent">View the set</button></div></div>
     </article>
     <article class="drop">
       <button class="frame" data-open="monarch" aria-label="View The Monarch Set"><img loading="lazy" data-a="hero-monarch" alt="Model in the sky blue Monarch Set, seated in a burgundy leather chair"><span class="badge wide">New</span></button>
       <div class="dropinfo"><h3 class="wide">The Monarch Set</h3><div class="price" data-price="monarch"></div>
         <p>For the kings who love to look good without doing too much.</p>
-        <div class="acts"><button class="btn light" data-add="monarch">Add to cart</button><button class="btn ghost" data-open="monarch">View the set</button></div></div>
+        <div class="acts"><button class="btn light" data-open="monarch">Choose size</button><button class="btn ghost" data-open="monarch">View the set</button></div></div>
     </article>
   </div>
 </section>
@@ -435,7 +457,7 @@ select{font:400 13px var(--text);height:34px;border:1px solid var(--line);backgr
     <details open><summary>How to order</summary><p>Choose your pieces, then tap Order on WhatsApp. Your order arrives in our chat, ready to send, and we confirm your size and delivery before you pay.</p></details>
     <details><summary>Order policy</summary><div id="housePolicy" class="dpad"></div></details>
     <details><summary>Women's size guide</summary><div id="houseSizes" class="dpad"></div></details>
-    <details><summary>Men's sizes</summary><p>Men's sets come in S to XXL, depending on the style. Not sure of your size? Ask us on WhatsApp before you order.</p></details>
+    <details><summary>Men's size guide</summary><div id="houseMen" class="dpad"></div></details>
   </div>
 </section>
 <footer>
@@ -494,6 +516,11 @@ const ALL=['doxa','bloom','regent','esther','monarch','palette','sterling','wave
 const priceOf=(id,s)=>P[id].big&&+s>=20?P[id].big:P[id].price;
 /* women's size chart, inches: size, bust, waist, hip, thigh, round sleeve */
 const CHART=[[4,30,23,36,20,12],[6,32,25,37,22,13],[8,34,27,38,24,14],[10,36,29,40,26,14],[12,38,31,42,28,15],[14,40,35,45,30,16],[16,42,35,48,32,16.5],[18,44,37,51,34,17],[20,46,42,56,36,17.5],[22,52,45,57,40,18],[24,56,48,60,44,20]];
+/* men's size chart, inches: size, chest, waist, hip, shoulder width, trouser length */
+const MCHART=[['S','Small',39,30,40,28,41],['M','Medium',41,35,42,30,41],['L','Large',43,39,44,32,42],['XL','X-Large',45,42,46,32,42]];
+const mchartHTML=(sizes,sel)=>`<div class="chartwrap"><table class="chart"><thead><tr><th scope="col">Size</th><th scope="col">Chest</th><th scope="col">Waist</th><th scope="col">Hip</th><th scope="col">Shoulder width</th><th scope="col">Trouser length</th></tr></thead><tbody>${MCHART.filter(r=>!sizes||sizes.includes(r[0])).map(r=>`<tr${sizes?` data-s="${r[0]}" aria-selected="${r[0]===sel}"`:''}><th scope="row">${r[1]}</th>${r.slice(2).map(v=>`<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+const MHOW=[['Chest','around the fullest part of your chest'],['Waist','around your natural waistline'],['Hip','around the widest part of your hips'],['Shoulder width','from one shoulder tip to the other'],['Trouser length','from your waist down to your desired length']];
+const howHTML=()=>`<ul class="how">${MHOW.map(([t,d])=>`<li><b>${t}</b> Measure ${d}.</li>`).join('')}</ul>`;
 const LENS=[['Petite',58,40],['Regular',60,44],['Tall',64,47]];
 const POLICY=[['Payment','Full payment is required before orders are processed. We do not accept payment on delivery.'],
  ['Processing time','Orders are processed within 3 to 7 working days.'],
@@ -642,7 +669,7 @@ function grid(){
   $('grid').innerHTML=list.map(x=>`<article class="tile"><div class="pic" data-open="${x.id}" role="button" tabindex="0" aria-label="View ${x.name}">
     <img class="cover" src="${x.img}" alt="${x.name}" loading="lazy"><img class="det" src="${x.det}" alt="" loading="lazy">
     <button class="fav" data-fav="${x.id}" aria-pressed="${saved.has(x.id)}" aria-label="Save ${x.name}">${heart}</button>
-    ${x.g==='women'?`<div class="sizes one"><button data-open="${x.id}">Check size and add</button></div>`:`<div class="sizes" aria-label="Add in size">${x.sizes.map(s=>`<button data-add="${x.id}" data-size="${s}" aria-label="Add size ${s}">${s}</button>`).join('')}</div>`}
+    ${true?`<div class="sizes one"><button data-open="${x.id}">Check size and add</button></div>`:`<div class="sizes" aria-label="Add in size">${x.sizes.map(s=>`<button data-add="${x.id}" data-size="${s}" aria-label="Add size ${s}">${s}</button>`).join('')}</div>`}
     <button class="quick" data-open="${x.id}" aria-label="Choose a size"></button></div>
     <div class="tinfo"><h3 class="wide">${x.name.replace('The ','')}</h3><div class="price">${naira(x.price)}</div><small>${range(x)} · ${x.colours.length} colour${x.colours.length>1?'s':''}</small></div></article>`).join('')
     ||`<div class="none">Nothing saved yet. <button style="text-decoration:underline" data-reset>Show everything</button></div>`;
@@ -690,8 +717,17 @@ function drawCart(){
 /* ---------- product sheet ---------- */
 let cur=null,curS='',curC='',curQ=1,curView='full',curStep='pick',curL='',overlay=null,lastFocus=null;
 function drawSheet(){
-  const x=P[cur],pr=priceOf(cur,curS),women=x.g==='women';
-  const row=CHART.find(r=>String(r[0])===curS);
+  const x=P[cur],pr=priceOf(cur,curS),women=x.g==='women',men=!women;
+  const row=CHART.find(r=>String(r[0])===curS),mrow=MCHART.find(r=>r[0]===curS);
+  const mcheck=men&&curStep==='check'?`<div class="side"><button class="x" data-close aria-label="Close"></button>
+    <button class="backlink" data-back>&lsaquo; Back to ${x.name.replace('The ','')}</button>
+    <h2 class="wide">Check your size</h2><p>Compare your measurements with the chart. Tap a row to change your size. All measurements are in inches.</p>
+    ${mchartHTML(x.sizes,curS)}
+    ${mrow?`<div class="sel"><b>${mrow[1]}:</b> chest ${mrow[2]}, waist ${mrow[3]}, hip ${mrow[4]}, shoulder width ${mrow[5]}, trouser length ${mrow[6]}</div>`:`<div class="sel"><b>Size ${curS}:</b> not on the chart yet. Ask us on WhatsApp for these measurements before you order.</div>`}
+    ${x.sizes.includes('XXL')&&curS!=='XXL'?'<button class="guide" style="margin:0;align-self:flex-start" data-s="XXL">Need XXL?</button>':''}
+    <details class="howto"><summary>How to measure</summary>${howHTML()}</details>
+    <label class="agree"><input type="checkbox" id="szok"> I have checked my measurements against the chart</label>
+    <button class="btn" id="confirmAdd" disabled>Add size ${curS} · ${naira(pr*curQ)}</button></div>`:'';
   const check=women&&curStep==='check'?`<div class="side"><button class="x" data-close aria-label="Close"></button>
     <button class="backlink" data-back>&lsaquo; Back to ${x.name.replace('The ','')}</button>
     <h2 class="wide">Check your size</h2><p>Compare your measurements with the chart. Tap a row to change your size. All measurements are in inches.</p>
@@ -705,16 +741,17 @@ function drawSheet(){
   <div class="side"><button class="x" data-close aria-label="Close"></button><h2 class="wide">${x.name}</h2><div class="price">${naira(pr)}${x.big?`<span class="for"> · size 20 and above ${naira(x.big)}</span>`:''}</div><p>${x.text}</p>
     ${x.for?`<div class="for">Perfect for: ${x.for}</div>`:''}
     <div><div class="lab wide">Colour: ${curC}</div><div class="cols">${x.colours.map(c=>`<button data-c="${c}" aria-pressed="${c===curC}">${c}</button>`).join('')}</div></div>
-    <div><div class="lab wide">Size${women?' <button class="guide" data-guide>Size guide</button>':''}</div><div class="pick">${x.sizes.map(s=>`<button class="s" data-s="${s}" aria-pressed="${s===curS}">${s}</button>`).join('')}</div></div>
+    <div><div class="lab wide">Size <button class="guide" data-guide>Size guide</button></div><div class="pick">${x.sizes.map(s=>`<button class="s" data-s="${s}" aria-pressed="${s===curS}">${s}</button>`).join('')}</div></div>
     ${x.note?`<div class="note">${x.note}</div>`:''}
-    <div class="buy"><div class="step"><button data-qty="-1" aria-label="One less">&minus;</button><span>${curQ}</span><button data-qty="1" aria-label="One more">+</button></div><button class="btn" id="addNow">${women?'Check size and add':'Add to cart · '+naira(pr*curQ)}</button></div></div>`;
-  $('sheet').classList.toggle('checking',!!check);
-  if(check){const s=$('sheet');s.querySelector('.side').outerHTML=check;
-    const ok=$('szok'),go=$('confirmAdd');ok.checked=!!drawSheet.ok;go.disabled=!(ok.checked&&curL);
-    ok.onchange=()=>{drawSheet.ok=ok.checked;go.disabled=!(ok.checked&&curL)};
-    go.onclick=()=>{addItem(cur,curS,curQ,true,curC,curL);curStep='pick';closeAll(true);openCart()};
+    <div class="buy"><div class="step"><button data-qty="-1" aria-label="One less">&minus;</button><span>${curQ}</span><button data-qty="1" aria-label="One more">+</button></div><button class="btn" id="addNow">Check size and add</button></div></div>`;
+  const step=check||mcheck,needL=women;
+  $('sheet').classList.toggle('checking',!!step);
+  if(step){const s=$('sheet');s.querySelector('.side').outerHTML=step;
+    const ok=$('szok'),go=$('confirmAdd'),ready=()=>ok.checked&&(!needL||curL);ok.checked=!!drawSheet.ok;go.disabled=!ready();
+    ok.onchange=()=>{drawSheet.ok=ok.checked;go.disabled=!ready()};
+    go.onclick=()=>{addItem(cur,curS,curQ,true,curC,needL?curL:undefined);curStep='pick';closeAll(true);openCart()};
     s.querySelector('.side').scrollTop=0;return}
-  $('addNow').onclick=()=>{if(women){curStep='check';drawSheet();$('sheet').scrollTop=0;return}addItem(cur,curS,curQ,true,curC);closeAll(true);openCart()};
+  $('addNow').onclick=()=>{curStep='check';drawSheet();$('sheet').scrollTop=0};
 }
 function show(el){overlay=el;$('veil').classList.add('on');document.body.classList.add('lock')}
 function openSheet(id,keep){if(!keep){lastFocus=document.activeElement;curS=defSize(P[id]);curC=P[id].colour;curQ=1;curView='full';curStep='pick';curL='';drawSheet.ok=false}cur=id;drawSheet();$('sheet').classList.add('on');show('sheet');const c=$('sheet').querySelector('.x');c&&c.focus({preventScroll:true})}
@@ -753,6 +790,7 @@ document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.tar
 
 grid();$('count').textContent=count();
 $('housePolicy').innerHTML=policyHTML();
+$('houseMen').innerHTML=`<p>All measurements are in inches. Need XXL? Ask us on WhatsApp for the measurements.</p>${mchartHTML(null)}${howHTML()}`;
 $('houseSizes').innerHTML=`<p>All measurements are in inches. Some styles cost a little more from size 20.</p>${chartHTML(null)}<div style="height:14px"></div>${lensHTML()}`;
 /* women: cards and the film */
 $('wcards').innerHTML=WOMEN.map(x=>`<article class="wcard"><button class="frame" data-open="${x.id}" aria-label="View ${x.name}"><img src="${x.img}" alt="${x.name}" loading="lazy"><span class="badge wide">New</span></button>
