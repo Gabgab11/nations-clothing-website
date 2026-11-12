@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nations Clothing · Admin</title>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-bf4D3+Xs/kLftj25GFJ3xIuItjra16/084XXFG9cJL8='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://cnwiclvcgsoppobptzej.supabase.co; connect-src https://cnwiclvcgsoppobptzej.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-swhg9wKdZs1BKuscvRfDHmga9N/geCPRCIVu19zXXbE='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://cnwiclvcgsoppobptzej.supabase.co; connect-src https://cnwiclvcgsoppobptzej.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#3b2116">
@@ -32,7 +32,7 @@ button{cursor:pointer}
 .seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);background:#faf6f2;padding:3px}
 .seg button{border:0;background:none;padding:10px;font-size:14px;color:var(--mid)}
 .seg button[aria-selected=true]{background:#fff;color:var(--brown);font-weight:600;box-shadow:0 1px 3px rgba(59,33,22,.12)}
-input.code{font-size:26px;letter-spacing:.5em;text-align:center;font-variant-numeric:tabular-nums;padding:12px}
+input.code{font-size:24px;letter-spacing:.32em;text-align:center;font-variant-numeric:tabular-nums;padding:12px}
 .linkb{border:0;background:none;color:var(--brown);font-size:13.5px;text-decoration:underline;text-underline-offset:3px;padding:4px 0}
 .gate .box>h1,.gate .box>p{margin:0}.gate .box>.btn{justify-self:start}
 .sheet.center{justify-content:center;align-items:center;padding:16px}.sheet .pane.small{height:auto;width:min(440px,100%)}
@@ -276,16 +276,17 @@ function gate(mode,note){
   setTimeout(()=>{const f=$('#nm')&&!gName?$('#nm'):$('#em');f&&f.focus()},30);
 }
 function codeScreen(r){
+  const N=r.len>=6&&r.len<=10?r.len:8;
   $('#gerr').textContent='';
-  $('#gbody').innerHTML=`<h1>Check your email</h1><p>We sent a 6-digit code to <b>${esc(gEmail)}</b>${gMode==='signup'&&r.existing?'. You already have an account, so this code signs you in':''}. It can take a minute to arrive; check your spam folder too.</p>
-   <label class="f">Code<input type="text" id="cd" inputmode="numeric" autocomplete="one-time-code" maxlength="10" pattern="[0-9]*" class="code" required></label>
+  $('#gbody').innerHTML=`<h1>Check your email</h1><p>We sent a ${N}-digit code to <b>${esc(gEmail)}</b>${gMode==='signup'&&r.existing?'. You already have an account, so this code signs you in':''}. It can take a minute to arrive; check your spam folder too.</p>
+   <label class="f">Code<input type="text" id="cd" inputmode="numeric" autocomplete="one-time-code" maxlength="${N}" pattern="[0-9]*" class="code" placeholder="${'•'.repeat(N)}" required></label>
    <button class="btn" id="go">${gMode==='signup'&&!r.existing?'Create my account':'Sign in'}</button>
    <div class="row" style="justify-content:space-between"><button type="button" class="linkb" id="again">Send a new code</button><button type="button" class="linkb" id="chg">Use another email</button></div>`;
   const cd=$('#cd');cd.focus();
-  cd.oninput=()=>{cd.value=cd.value.replace(/\D/g,'');if(cd.value.length===6)$('#gf').requestSubmit()};
+  cd.oninput=()=>{cd.value=cd.value.replace(/\D/g,'').slice(0,N);if(cd.value.length===N)$('#gf').requestSubmit()};
   $('#chg').onclick=()=>gate();
   $('#again').onclick=async()=>{const x=await sendCode(gMode,gEmail,gName);$('#gerr').textContent=x.ok?'':x.error==='no_account'?'No account for this email.':x.error;if(x.ok)toast('New code sent')};
-  $('#gf').onsubmit=async e=>{e.preventDefault();const c=cd.value.trim();if(c.length<6)return $('#gerr').textContent='Enter the 6-digit code from the email.';
+  $('#gf').onsubmit=async e=>{e.preventDefault();const c=cd.value.trim();if(c.length<N)return $('#gerr').textContent='Enter the '+N+'-digit code from the email.';
     const b=$('#go');if(b.disabled)return;b.disabled=true;b.textContent='Checking…';
     const v=await verifyCode(gEmail,c);if(v.ok)return boot();
     $('#gerr').textContent=v.error;b.disabled=false;b.textContent='Try again';cd.select()};
