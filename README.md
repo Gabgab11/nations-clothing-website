@@ -7,7 +7,7 @@ delivery details, get an order number, and send the order to the shop on WhatsAp
 
 ## Admin
 
-The team manages the shop at https://nationsclothing.org/admin/ (not linked from the site).
+The team manages the shop from a private team page. Team members sign in with an emailed code; new accounts need an owner's approval.
 
 - **Orders:** every checkout, with the customer's details, a status (new, confirmed, paid, shipped,
   delivered, cancelled) and private team notes. One tap to WhatsApp or call the customer.
@@ -17,7 +17,7 @@ The team manages the shop at https://nationsclothing.org/admin/ (not linked from
   the catalogue, the Women section, New arrivals or the runway; mark pieces sold out.
 - **More looks:** photos for the "More looks" section.
 - **Site info:** WhatsApp number, Instagram, welcome text, Women section text, footer and order policy.
-- **Team:** owners invite people by link, change roles and make password reset links.
+- **Team:** owners approve new accounts, change roles and remove people.
 - **Recently deleted:** anything deleted can be restored for 30 days.
 
 Content lives in Supabase (project `nations-clothing`). The site keeps a built-in copy of the starting
