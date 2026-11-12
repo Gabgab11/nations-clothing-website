@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nations Clothing · Admin</title>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-xVUWW6yZksILIWytKX52ioVdE43MZI6Jn7t8piizvTQ='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://cnwiclvcgsoppobptzej.supabase.co; connect-src https://cnwiclvcgsoppobptzej.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-bf4D3+Xs/kLftj25GFJ3xIuItjra16/084XXFG9cJL8='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://cnwiclvcgsoppobptzej.supabase.co; connect-src https://cnwiclvcgsoppobptzej.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#3b2116">
@@ -27,7 +27,16 @@ button{cursor:pointer}
 .gate .logo{background:var(--dark);margin:-32px -28px 8px;padding:26px 28px;display:flex;justify-content:center}.gate .logo svg{height:84px}
 .gate h1{font-size:20px;font-weight:600}
 .gate p{color:var(--mid);font-size:14px}
+.gate h1{margin-top:4px}
 #gbody{display:grid;gap:14px}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);background:#faf6f2;padding:3px}
+.seg button{border:0;background:none;padding:10px;font-size:14px;color:var(--mid)}
+.seg button[aria-selected=true]{background:#fff;color:var(--brown);font-weight:600;box-shadow:0 1px 3px rgba(59,33,22,.12)}
+input.code{font-size:26px;letter-spacing:.5em;text-align:center;font-variant-numeric:tabular-nums;padding:12px}
+.linkb{border:0;background:none;color:var(--brown);font-size:13.5px;text-decoration:underline;text-underline-offset:3px;padding:4px 0}
+.gate .box>h1,.gate .box>p{margin:0}.gate .box>.btn{justify-self:start}
+.sheet.center{justify-content:center;align-items:center;padding:16px}.sheet .pane.small{height:auto;width:min(440px,100%)}
+.tick{width:56px;height:56px;border-radius:50%;background:var(--brown);color:#fff;display:grid;place-items:center;font-size:26px}
 
 /* shell */
 .top{position:sticky;top:0;z-index:20;background:var(--dark);color:#fff;display:flex;align-items:center;gap:16px;padding:10px 20px}
@@ -165,14 +174,21 @@ function authErr({status,data}){const c=data&&(data.error_code||data.code);
   if(c==='same_password')return 'Choose a password different from your current one.';
   if(c==='weak_password')return 'Choose a longer password (at least 10 characters).';
   return (data&&(data.msg||data.message))||'That did not work. Try again in a moment.'}
-async function signIn(email,pw){const r=await auth('token?grant_type=password',{body:{email:email.trim().toLowerCase(),password:pw}});
-  if(!r.ok)return {ok:false,error:authErr(r)};saveS(toS(r.data));return {ok:true}}
+async function sendCode(mode,email,name){
+  try{const r=await fetch(SB+'/functions/v1/admin-code',{method:'POST',headers:hdr(null,{'Content-Type':'application/json'}),body:JSON.stringify({action:'send',mode,email,name})});
+    const d=await r.json().catch(()=>({}));return r.ok?{ok:true,...d}:{ok:false,error:d.error||'Could not send the code. Try again.'}}
+  catch(e){return {ok:false,error:'Could not reach the server. Check your connection and try again.'}}}
+async function verifyCode(email,code){
+  for(const type of ['email','magiclink']){const r=await auth('verify',{body:{type,email:email.trim().toLowerCase(),token:code}});
+    if(r.ok&&r.data.access_token){saveS(toS(r.data));return {ok:true}}
+    if(r.status===0)return {ok:false,error:authErr(r)}}
+  return {ok:false,error:'That code is wrong or has expired. Check it, or ask for a new one.'}}
 let refreshing=null;
 async function sess(){const s=loadS();if(!s)return null;if(s.expires_at-60>Date.now()/1000)return s;
   if(!refreshing)refreshing=auth('token?grant_type=refresh_token',{body:{refresh_token:s.refresh_token}}).then(r=>{
     if(!r.ok){if(r.status!==0)saveS(null);return r.status===0?s:null}const n=toS(r.data);saveS(n);return n}).finally(()=>{refreshing=null});
   return refreshing}
-async function signOut(){const s=loadS();saveS(null);if(s)await auth('logout',{token:s.access_token});location.hash='';boot()}
+async function signOut(){const s=loadS();saveS(null);ME=null;if(s)await auth('logout',{token:s.access_token});history.replaceState(null,'',location.pathname);gate('signin')}
 
 /* ---------- data ---------- */
 async function rest(path,{method='GET',body,prefer}={}){
@@ -232,49 +248,76 @@ const filesOf=r=>r&&r.startsWith('sb:')?[r.slice(3),r.slice(3).replace('-1600.',
 let ME=null,VIEW='overview',CACHE={};
 function expired(){if(ME){ME=null;saveS(null);gate('signin','Your session has expired. Sign in again.')}}
 
-/* ---------- gate screens ---------- */
+/* ---------- gate: sign in or create account, then a code by email ---------- */
+let gMode='signin',gEmail='',gName='';
 function gate(mode,note){
-  const code=(location.hash.match(/^#join\/([A-Za-z0-9_-]+)/)||[])[1];
+  if(mode)gMode=mode;
   $('#app').innerHTML=`<div class="gate"><form class="box" id="gf" novalidate><div class="logo">${LOGO}</div><div id="gbody"></div><div class="err" id="gerr" role="alert">${esc(note||'')}</div></form></div>`;
-  if(code)return joinScreen(code);
-  $('#gbody').innerHTML=`<h1>Admin sign in</h1><p>For the Nations Clothing team only.</p>
-   <label class="f">Email<input type="email" id="em" autocomplete="username" required></label>
-   <label class="f">Password<input type="password" id="pw" autocomplete="current-password" required></label>
-   <button class="btn" id="go">Sign in</button>`;
-  $('#gf').onsubmit=async e=>{e.preventDefault();const b=$('#go');b.disabled=true;b.textContent='Signing in…';
-    const r=await signIn($('#em').value,$('#pw').value);if(r.ok)return boot();$('#gerr').textContent=r.error;b.disabled=false;b.textContent='Sign in'};
-  $('#em').focus();
+  const tabs=`<div class="seg" role="tablist"><button type="button" role="tab" data-m="signin" aria-selected="${gMode==='signin'}">Sign in</button><button type="button" role="tab" data-m="signup" aria-selected="${gMode==='signup'}">Create account</button></div>`;
+  $('#gbody').innerHTML=tabs+(gMode==='signup'
+   ?`<h1>Create your team account</h1><p>For the Nations Clothing team. We'll email you a code, no password needed.</p>
+     <label class="f">First name<input type="text" id="nm" maxlength="40" autocomplete="given-name" value="${esc(gName)}" required></label>
+     <label class="f">Email<input type="email" id="em" autocomplete="email" value="${esc(gEmail)}" required></label>
+     <button class="btn" id="go">Email me a code</button>`
+   :`<h1>Welcome back</h1><p>Enter your email and we'll send you a code to sign in.</p>
+     <label class="f">Email<input type="email" id="em" autocomplete="email" value="${esc(gEmail)}" required></label>
+     <button class="btn" id="go">Email me a code</button>`);
+  $('#gbody .seg').onclick=e=>{const b=e.target.closest('[data-m]');if(b&&b.dataset.m!==gMode){keep();gate(b.dataset.m)}};
+  const keep=()=>{gEmail=$('#em').value.trim();if($('#nm'))gName=$('#nm').value.trim()};
+  $('#gf').onsubmit=async e=>{e.preventDefault();keep();const err=$('#gerr');err.textContent='';
+    if(gMode==='signup'&&gName.length<2){err.textContent='Enter your first name.';return $('#nm').focus()}
+    if(!/^\S+@\S+\.\S+$/.test(gEmail)){err.textContent='Enter a valid email address.';return $('#em').focus()}
+    const b=$('#go');b.disabled=true;b.textContent='Sending…';
+    const r=await sendCode(gMode,gEmail,gName);
+    if(!r.ok){b.disabled=false;b.textContent='Email me a code';
+      if(r.error==='no_account'){err.innerHTML='There is no account for this email yet. <a href="#" id="toSu">Create an account</a>';$('#toSu').onclick=x=>{x.preventDefault();gate('signup')}}
+      else err.textContent=r.error;return}
+    codeScreen(r)};
+  setTimeout(()=>{const f=$('#nm')&&!gName?$('#nm'):$('#em');f&&f.focus()},30);
 }
-async function joinScreen(code){
-  $('#gbody').innerHTML='<p>Checking your link…</p>';
-  const r=await fetch(SB+'/rest/v1/rpc/admin_invite_info',{method:'POST',headers:hdr(null,{'Content-Type':'application/json'}),body:JSON.stringify({p_code:code})}).then(r=>r.json()).catch(()=>null);
-  if(!r||!r.kind){$('#gbody').innerHTML='<h1>This link has expired</h1><p>Ask the shop owner for a new link.</p><a class="btn" href="#">Go to sign in</a>';$('#gbody a').onclick=()=>{location.hash='';setTimeout(()=>gate('signin'))};return}
-  const reset=r.kind==='reset';
-  $('#gbody').innerHTML=`<h1>${reset?'Choose a new password':'Join the Nations Clothing team'}</h1>
-   <p>${reset?'Set a new password for '+esc(r.email)+'.':'You were invited as '+(r.role==='owner'?'an owner':'an editor')+'. Create your sign-in below.'}</p>
-   ${reset?'':'<label class="f">Your name<input type="text" id="nm" maxlength="80" autocomplete="name"></label><label class="f">Email<input type="email" id="em" autocomplete="username" required></label>'}
-   <label class="f">Password <input type="password" id="pw" autocomplete="new-password" minlength="10" required><span class="hint">At least 10 characters.</span></label>
-   <button class="btn" id="go">${reset?'Save password':'Create my sign-in'}</button>`;
-  $('#gf').onsubmit=async e=>{e.preventDefault();const pw=$('#pw').value,em=reset?r.email:$('#em').value.trim();
-    if(pw.length<10)return $('#gerr').textContent='Choose a password of at least 10 characters.';
-    if(!reset&&!/^\S+@\S+\.\S+$/.test(em))return $('#gerr').textContent='Enter a valid email address.';
-    const b=$('#go');b.disabled=true;
-    const j=await fetch(SB+'/rest/v1/rpc/admin_join',{method:'POST',headers:hdr(null,{'Content-Type':'application/json'}),body:JSON.stringify({p_code:code,p_email:em,p_password:pw,p_name:reset?'':$('#nm').value.trim()})}).catch(()=>null);
-    if(!j||!j.ok){const d=j?await j.json().catch(()=>({})):{};$('#gerr').textContent=(d.message||'That did not work. The link may have expired.');b.disabled=false;return}
-    history.replaceState(null,'',location.pathname);const s=await signIn(em,pw);if(s.ok)return boot();gate('signin','Your sign-in is ready. Sign in below.')};
+function codeScreen(r){
+  $('#gerr').textContent='';
+  $('#gbody').innerHTML=`<h1>Check your email</h1><p>We sent a 6-digit code to <b>${esc(gEmail)}</b>${gMode==='signup'&&r.existing?'. You already have an account, so this code signs you in':''}. It can take a minute to arrive; check your spam folder too.</p>
+   <label class="f">Code<input type="text" id="cd" inputmode="numeric" autocomplete="one-time-code" maxlength="10" pattern="[0-9]*" class="code" required></label>
+   <button class="btn" id="go">${gMode==='signup'&&!r.existing?'Create my account':'Sign in'}</button>
+   <div class="row" style="justify-content:space-between"><button type="button" class="linkb" id="again">Send a new code</button><button type="button" class="linkb" id="chg">Use another email</button></div>`;
+  const cd=$('#cd');cd.focus();
+  cd.oninput=()=>{cd.value=cd.value.replace(/\D/g,'');if(cd.value.length===6)$('#gf').requestSubmit()};
+  $('#chg').onclick=()=>gate();
+  $('#again').onclick=async()=>{const x=await sendCode(gMode,gEmail,gName);$('#gerr').textContent=x.ok?'':x.error==='no_account'?'No account for this email.':x.error;if(x.ok)toast('New code sent')};
+  $('#gf').onsubmit=async e=>{e.preventDefault();const c=cd.value.trim();if(c.length<6)return $('#gerr').textContent='Enter the 6-digit code from the email.';
+    const b=$('#go');if(b.disabled)return;b.disabled=true;b.textContent='Checking…';
+    const v=await verifyCode(gEmail,c);if(v.ok)return boot();
+    $('#gerr').textContent=v.error;b.disabled=false;b.textContent='Try again';cd.select()};
 }
-
+function waiting(me){
+  $('#app').innerHTML=`<div class="gate"><div class="box"><div class="logo">${LOGO}</div><h1>Thanks, ${esc((me.name||'').split(' ')[0]||'there')}</h1>
+   <p>Your account is ready and your request is with the shop owner. Once they approve you, you'll get a welcome email and can sign in here with your email.</p>
+   <button class="btn ghost" id="so">Sign out</button></div></div>`;
+  $('#so').onclick=signOut;
+}
+function welcome(){
+  const d=document.createElement('div');d.className='sheet center';
+  d.innerHTML=`<div class="pane small" role="dialog" aria-modal="true" aria-label="Welcome"><div class="pb" style="text-align:center;justify-items:center;padding:34px 26px">
+   <div class="tick" aria-hidden="true">✓</div><h2>Welcome to the team, ${esc((ME.name||'').split(' ')[0]||'')}</h2>
+   <p class="sub" style="margin:0">You're the shop owner. You can see orders and customers, change products, pictures and text, and approve anyone else who creates an account under Team.</p>
+   <button class="btn" data-x>Let's go</button></div></div>`;
+  document.body.append(d);d.onclick=e=>{if(e.target===d||e.target.closest('[data-x]'))d.remove()};
+}
 /* ---------- shell ---------- */
 const VIEWS=[['overview','Overview'],['orders','Orders'],['customers','Customers'],['products','Products'],['looks','More looks'],['site','Site info'],['team','Team'],['bin','Recently deleted'],['account','Account']];
 async function boot(){
-  if(/^#join\//.test(location.hash)){saveS(null);return gate('join')}
-  const s=await sess();if(!s)return gate('signin');
-  const r=await db.get('admin_users','select=user_id,email,name,role&user_id=eq.'+s.user.id);
-  if(!r.ok||!r.data||!r.data.length){saveS(null);return gate('signin',r.ok?'This account is not on the Nations Clothing team.':r.error)}
-  ME=r.data[0];
+  if(/^#join\//.test(location.hash))history.replaceState(null,'',location.pathname);
+  const s=await sess();if(!s)return gate();
+  const r=await db.rpc('admin_me');
+  if(!r.ok){if(ME===null)saveS(null);return gate('signin',r.error==='Not allowed'?'This account cannot use the team page.':r.error)}
+  if(r.data.pending)return waiting(r.data);
+  ME=r.data;
+  if(ME.first){fetch(SB+'/functions/v1/admin-code',{method:'POST',headers:hdr(s.access_token,{'Content-Type':'application/json'}),body:JSON.stringify({action:'welcome',user_id:ME.user_id})}).catch(()=>{});setTimeout(welcome,300)}
   $('#app').innerHTML=`<div class="top"><span class="logo">${LOGO}</span><div class="who">${esc(ME.name||ME.email)}<br><a href="../" target="_blank" rel="noopener">View the shop ↗</a></div></div>
-   <nav class="nav" id="nav">${VIEWS.map(([k,t])=>`<button data-v="${k}">${t}${k==='orders'?'<span class="dot hide" id="newdot"></span>':''}</button>`).join('')}</nav><main id="main"></main>`;
+   <nav class="nav" id="nav">${VIEWS.map(([k,t])=>`<button data-v="${k}">${t}${k==='orders'?'<span class="dot hide" id="newdot"></span>':k==='team'?'<span class="dot hide" id="reqdot"></span>':''}</button>`).join('')}</nav><main id="main"></main>`;
   $('#nav').onclick=e=>{const b=e.target.closest('[data-v]');if(b)go(b.dataset.v)};
+  if(ME.role==='owner')db.get('admin_requests','select=user_id').then(x=>x.ok&&reqDot(x.data));
   db.rpc('admin_take_expired_uploads').then(x=>x.ok&&x.data&&x.data.length&&removeFiles(x.data.flatMap(filesOf)));
   go((location.hash.slice(1)||'overview').split('/')[0]);
 }
@@ -523,24 +566,25 @@ R.site=async()=>{
 /* ---------- team ---------- */
 R.team=async()=>{
   const owner=ME.role==='owner';
-  const [u,i]=await Promise.all([db.get('admin_users','select=*&order=created_at'),owner?db.rpc('admin_list_invites'):Promise.resolve({ok:true,data:[]})]);if(!u.ok)return fail(u.error);
-  main(`<h2>Team</h2><p class="sub">People who can sign in here. Owners can invite people and manage the team; editors can do everything else.</p>
+  const [u,q]=await Promise.all([db.get('admin_users','select=*&order=created_at'),owner?db.get('admin_requests','select=*&order=created_at.desc'):Promise.resolve({ok:true,data:[]})]);
+  if(!u.ok)return fail(u.error);
+  reqDot(q.data||[]);
+  main(`<h2>Team</h2><p class="sub">Anyone on the team signs in at this page with their email and a code. New people tap <b>Create account</b> here, then ${owner?'you approve them below':'an owner approves them'}.</p>
+   ${owner?`<h3>Waiting for approval</h3><div class="list">${q.data&&q.data.length?q.data.map(v=>`<div class="item" style="grid-template-columns:minmax(0,1fr) auto"><div><h4>${esc(v.name||v.email)}</h4><div class="meta">${esc(v.email)} · asked ${when(v.created_at)}</div></div>
+    <div class="acts"><select data-as="${v.user_id}" aria-label="Role for ${esc(v.name||v.email)}" style="width:auto;padding:6px 8px;font-size:14px"><option value="editor">Editor</option><option value="owner">Owner</option></select><button class="btn small" data-ok="${v.user_id}">Approve</button><button class="btn small danger" data-no="${v.user_id}">Decline</button></div></div>`).join(''):'<div class="empty">Nobody is waiting. When someone creates an account, they show up here.</div>'}</div><h3>Team</h3>`:''}
    <div class="list">${u.data.map(m=>`<div class="item" style="grid-template-columns:minmax(0,1fr) auto"><div><h4>${esc(m.name||m.email)}${m.user_id===ME.user_id?' <span class="hint">(you)</span>':''}</h4><div class="meta">${esc(m.email)} · ${m.role==='owner'?'Owner':'Editor'}</div></div>
-    <div class="acts">${owner&&m.user_id!==ME.user_id?`<button class="btn small ghost" data-role="${m.user_id}" data-to="${m.role==='owner'?'editor':'owner'}">Make ${m.role==='owner'?'editor':'owner'}</button><button class="btn small ghost" data-reset="${m.user_id}">Password reset link</button><button class="btn small danger" data-rm="${m.user_id}">Remove</button>`:''}</div></div>`).join('')}</div>
-   ${owner?`<h3>Invite someone</h3><div class="card grid"><div class="two"><label class="f">Role<select id="irole"><option value="editor">Editor: orders, products, pictures and text</option><option value="owner">Owner: also manages the team</option></select></label><label class="f">Who is it for? <i>(a note for you)</i><input type="text" id="inote" maxlength="80" placeholder="Ada, shop manager"></label></div>
-    <div><button class="btn small" id="inv">Create invite link</button></div><div id="ilink"></div></div>
-    <h3>Open invite links</h3><div class="list">${i.data&&i.data.length?i.data.map(v=>`<div class="item" style="grid-template-columns:minmax(0,1fr) auto"><div><h4>${esc(v.note||'Invite')}</h4><div class="meta">${v.role==='owner'?'Owner':'Editor'} · expires ${when(v.expires_at)}</div></div><div class="acts"><button class="btn small danger" data-rev="${v.id}">Cancel link</button></div></div>`).join(''):'<div class="empty">No open invite links.</div>'}</div>`:''}`);
-  const show=(code,what)=>{const url=location.origin+location.pathname+'#join/'+code;$('#ilink')?($('#ilink').innerHTML=linkBox(url,what)):sheet('Link ready',linkBox(url,what),'<button class="btn ghost" data-x>Done</button>');
-    document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>navigator.clipboard.writeText(b.dataset.copy).then(()=>toast('Link copied')))};
-  const linkBox=(url,what)=>`<div class="grid" style="gap:8px;margin-top:8px"><p class="hint">${what} Send it privately (it works once and expires in 7 days).</p><input type="text" readonly value="${esc(url)}"><div class="row"><button class="btn small" data-copy="${esc(url)}">Copy link</button><a class="btn small wa" target="_blank" rel="noopener noreferrer" href="https://wa.me/?text=${encodeURIComponent(url)}">Share on WhatsApp</a></div></div>`;
-  const inv=$('#inv');if(inv)inv.onclick=async()=>{inv.disabled=true;const r=await db.rpc('admin_create_invite',{p_role:$('#irole').value,p_note:$('#inote').value.trim()});inv.disabled=false;if(!r.ok)return toast(r.error);show(r.data,'Invite link ready.')};
+    <div class="acts">${owner&&m.user_id!==ME.user_id?`<button class="btn small ghost" data-role="${m.user_id}" data-to="${m.role==='owner'?'editor':'owner'}">Make ${m.role==='owner'?'editor':'owner'}</button><button class="btn small danger" data-rm="${m.user_id}">Remove</button>`:''}</div></div>`).join('')}</div>
+   <p class="hint" style="margin-top:14px">Editors can do everything except manage the team. Owners can also approve, remove and change roles.</p>`);
   $('#main').onclick=async e=>{const b=e.target.closest('button');if(!b)return;
-    if(b.dataset.role){const r=await db.rpc('admin_set_role',{p_user:b.dataset.role,p_role:b.dataset.to});toast(r.ok?'Role changed':r.error);if(r.ok)R.team()}
-    else if(b.dataset.reset){const r=await db.rpc('admin_create_reset',{p_user:b.dataset.reset});if(!r.ok)return toast(r.error);const url=location.origin+location.pathname+'#join/'+r.data;sheet('Password reset link',linkBox(url,'Reset link ready.'),'<button class="btn ghost" data-x>Done</button>');document.querySelectorAll('[data-copy]').forEach(c=>c.onclick=()=>navigator.clipboard.writeText(c.dataset.copy).then(()=>toast('Link copied')))}
-    else if(b.dataset.rm){if(!confirm('Remove this person from the team? They can no longer sign in.'))return;const r=await db.rpc('admin_remove_member',{p_user:b.dataset.rm});toast(r.ok?'Removed from the team':r.error);if(r.ok)R.team()}
-    else if(b.dataset.rev){const r=await db.rpc('admin_revoke_invite',{p_id:b.dataset.rev});toast(r.ok?'Link cancelled':r.error);if(r.ok)R.team()}};
+    if(b.dataset.ok){b.disabled=true;const role=$(`[data-as="${b.dataset.ok}"]`).value;const r=await db.rpc('admin_approve',{p_user:b.dataset.ok,p_role:role});
+      if(!r.ok){b.disabled=false;return toast(r.error)}
+      const s=await sess();fetch(SB+'/functions/v1/admin-code',{method:'POST',headers:hdr(s&&s.access_token,{'Content-Type':'application/json'}),body:JSON.stringify({action:'welcome',user_id:b.dataset.ok})}).catch(()=>{});
+      toast('Approved. We emailed them a welcome.');R.team()}
+    else if(b.dataset.no){if(!confirm('Decline this request? Their account is removed.'))return;const r=await db.rpc('admin_decline',{p_user:b.dataset.no});toast(r.ok?'Request declined':r.error);if(r.ok)R.team()}
+    else if(b.dataset.role){const r=await db.rpc('admin_set_role',{p_user:b.dataset.role,p_role:b.dataset.to});toast(r.ok?'Role changed':r.error);if(r.ok)R.team()}
+    else if(b.dataset.rm){if(!confirm('Remove this person from the team? They can no longer sign in.'))return;const r=await db.rpc('admin_remove_member',{p_user:b.dataset.rm});toast(r.ok?'Removed from the team':r.error);if(r.ok)R.team()}};
 };
-
+function reqDot(list){const d=$('#reqdot');if(d){d.textContent=list.length;d.classList.toggle('hide',!list.length)}}
 /* ---------- recently deleted ---------- */
 R.bin=async()=>{
   const [p,l,o]=await Promise.all([db.get('products','select=id,name,photo,deleted_at&deleted_at=not.is.null&order=deleted_at.desc'),db.get('lookbook','select=id,alt,photo,deleted_at&deleted_at=not.is.null&order=deleted_at.desc'),db.get('orders','select=id,order_no,customer_name,total,deleted_at&deleted_at=not.is.null&order=deleted_at.desc')]);
@@ -554,17 +598,13 @@ R.bin=async()=>{
 
 /* ---------- account ---------- */
 R.account=()=>{
-  main(`<h2>Account</h2><p class="sub">Signed in as ${esc(ME.email)} (${ME.role==='owner'?'owner':'editor'}).</p><div class="grid">
+  main(`<h2>Account</h2><p class="sub">Signed in as ${esc(ME.email)} (${ME.role==='owner'?'owner':'editor'}). You sign in with a code sent to this email, so there's no password to remember.</p><div class="grid">
    <form class="card grid" id="fn"><label class="f">Your name<input type="text" id="an" maxlength="80" value="${esc(ME.name)}"></label><div><button class="btn small">Save name</button></div></form>
-   <form class="card grid" id="fp"><label class="f">New password<input type="password" id="ap" minlength="10" autocomplete="new-password"><span class="hint">At least 10 characters.</span></label><div><button class="btn small">Change password</button></div></form>
    <div class="card"><button class="btn ghost" id="so">Sign out</button></div></div>`);
   $('#fn').onsubmit=async e=>{e.preventDefault();const n=$('#an').value.trim();const r=await db.set('admin_users',ME.user_id,{name:n},'user_id');if(r.ok){ME.name=n;toast('Name saved')}else toast(r.error)};
-  $('#fp').onsubmit=async e=>{e.preventDefault();const p=$('#ap').value;if(p.length<10)return toast('Choose a password of at least 10 characters.');const s=await sess();
-    const r=await auth('user',{method:'PUT',body:{password:p},token:s&&s.access_token});toast(r.ok?'Password changed':authErr(r));if(r.ok)$('#ap').value=''};
   $('#so').onclick=signOut;
 };
 
-addEventListener('hashchange',()=>{if(/^#join\//.test(location.hash))boot()});
 boot();
 })();
 </script>
