@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nations Clothing</title>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-idUOC27FhOTP6L+qx45SS2CHYzVFWOoHWkP40GOvg4w='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://cnwiclvcgsoppobptzej.supabase.co; media-src 'self'; connect-src 'self' https://cnwiclvcgsoppobptzej.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-DhWaZ6BbihydZ6yFO2YQQIzobd9U5GS75idUNYsftd8='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://cnwiclvcgsoppobptzej.supabase.co; media-src 'self'; connect-src 'self' https://cnwiclvcgsoppobptzej.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#fbf9f7">
 <meta name="description" content="Nations Clothing: unisex fashion made in Nigeria and shipped worldwide. Shop the new collection and order on WhatsApp.">
@@ -382,6 +382,32 @@ header{background:#fbf6f2;box-shadow:0 1px 0 rgba(42,23,17,.09)}
   .gal{height:auto;min-height:0}
   .gal .cover{position:relative;display:block;width:100%;height:auto;max-height:78svh;object-fit:contain}
 }
+
+/* video hero (sample, Nov 17) */
+.vhero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:clamp(24px,4vw,64px);
+  height:calc(100vh - var(--hh));height:calc(100svh - var(--hh));min-height:520px;padding:clamp(18px,3vh,34px) var(--gut);
+  background:linear-gradient(90deg,#f7eee7 0%,#efe1d5 45%,#f5ebe2 70%,#fbf6f2 100%);overflow:hidden}
+.vhero:before{content:"";position:absolute;inset:-20%;background:repeating-linear-gradient(118deg,transparent 0 9%,rgba(42,23,17,.035) 9% 15%,transparent 15% 27%);pointer-events:none}
+.vh-copy{position:relative;max-width:420px}
+.vh-copy h1{font-weight:400;font-size:clamp(26px,2.6vw,40px);line-height:1.15;letter-spacing:.16em;color:#2a1711;margin-top:14px}
+.vh-copy p{margin-top:16px;font-size:15px;line-height:1.65;color:#7a6558}
+.vh-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.vh-acts .btn{background:#2a1711;color:#fff}.vh-acts .btn.ghost{background:none;color:#2a1711}
+.vh-frame{position:relative;height:100%;aspect-ratio:9/16;max-height:100%;overflow:hidden;background:#e9d9cc;box-shadow:0 30px 60px -30px rgba(42,23,17,.45)}
+.vh-frame video,.vh-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vh-side{position:relative;justify-self:end;display:grid;gap:14px;text-align:right;color:#7a6558;font-size:12px;letter-spacing:.14em}
+.vh-side b{display:block;font-family:var(--wide);font-weight:400;color:#2a1711;font-size:13px}
+.vh-down{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);font-family:var(--wide);font-size:9px;letter-spacing:.2em;color:#7a6558;z-index:3}
+@media (max-width:820px){
+  .vhero{display:block;padding:0;height:calc(100svh - var(--hh));background:#2a1711}
+  .vhero:before{display:none}
+  .vh-frame{position:absolute;inset:0;height:auto;aspect-ratio:auto;box-shadow:none}
+  .vh-frame:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,10,6,0) 45%,rgba(20,10,6,.72) 100%)}
+  .vh-copy{position:absolute;left:20px;right:20px;bottom:calc(28px + env(safe-area-inset-bottom));z-index:2;color:#fff;max-width:none}
+  .vh-copy .eyebrow{color:#f0d9c7}.vh-copy h1{color:#fff;font-size:26px}.vh-copy p{color:#f3e6dc;font-size:14px;margin-top:10px}
+  .vh-acts{margin-top:18px}.vh-acts .btn{background:#fff;color:#2a1711}.vh-acts .btn.ghost{color:#fff;background:none}
+  .vh-side,.vh-down{display:none}
+}
 </style>
 </head>
 <body>
@@ -395,6 +421,18 @@ header{background:#fbf6f2;box-shadow:0 1px 0 rgba(42,23,17,.09)}
     </div>
   </div>
 </header>
+
+<section class="vhero" id="top" aria-label="Our new look">
+  <div class="vh-copy">
+    <div class="eyebrow wide">Nations Clothing</div>
+    <h1 class="wide">Our New Look</h1>
+    <p>Unisex clothing, made in Nigeria and shipped worldwide.</p>
+    <div class="vh-acts"><a class="btn" href="#runway">Shop the looks</a><a class="btn ghost" href="#catalogue">See the catalogue</a></div>
+  </div>
+  <div class="vh-frame"><img data-a="runway-poster" alt=""><video id="hvid" muted autoplay playsinline webkit-playsinline loop disablepictureinpicture preload="none" aria-label="Campaign film: models in the new Nations Clothing sets"></video></div>
+  <div class="vh-side"><div><b>For the Kings</b>Sets and natives</div><div><b>For the Queens</b>Bubu, dresses and sets</div><div><b>Made in Nigeria</b>Shipped worldwide</div></div>
+  <a class="vh-down" href="#runway">Scroll to walk the line</a>
+</section>
 
 <div class="pin" id="runway">
   <main class="run">
@@ -483,8 +521,15 @@ header{background:#fbf6f2;box-shadow:0 1px 0 rgba(42,23,17,.09)}
   <div class="bar"><i></i></div>
 </div>
 
-<script>
-const A={"blossom": "img/blossom.webp?v=34d3451b", "dt-bloom": "img/dt-bloom.webp?v=a482db41", "dt-doxa": "img/dt-doxa.webp?v=b55b7f0e", "dt-esther": "img/dt-esther.webp?v=657341b9", "dt-monarch": "img/dt-monarch.webp?v=26121059", "dt-palette": "img/dt-palette.webp?v=e948cd7b", "dt-regent": "img/dt-regent.webp?v=74b560ff", "dt-sterling": "img/dt-sterling.webp?v=3f79e2e7", "dt-wave": "img/dt-wave.webp?v=07986a21", "hero-monarch": "img/hero-monarch.webp?v=21c65c76", "hero-regent": "img/hero-regent.webp?v=74b560ff", "lb-cage": "img/lb-cage.webp?v=eb76b7d3", "lb-group": "img/lb-group.webp?v=dd1621d4", "lb-lilac": "img/lb-lilac.webp?v=4a7664a2", "lb-redpink": "img/lb-redpink.webp?v=4bcd90cd", "look-bloom": "img/look-bloom.webp?v=b67dfac6", "look-doxa": "img/look-doxa.webp?v=df278483", "look-lilac": "img/look-lilac.webp?v=7d8214e3", "look-monarch": "img/look-monarch.webp?v=c066a208", "look-palette": "img/look-palette.webp?v=83179417", "look-pink": "img/look-pink.webp?v=80a5e6a9", "look-regent": "img/look-regent.webp?v=62cc9b2b", "look-sterling": "img/look-sterling.webp?v=f4a94f68", "ph-bloom": "img/ph-bloom.webp?v=7d5749c8", "ph-doxa": "img/ph-doxa.webp?v=e5de78d0", "ph-esther": "img/ph-esther.webp?v=fb95168b", "ph-lilac": "img/ph-lilac.webp?v=89a54724", "ph-monarch": "img/ph-monarch.webp?v=21c65c76", "ph-palette": "img/ph-palette.webp?v=f4042a6a", "ph-pink": "img/ph-pink.webp?v=e0b42fd2", "ph-regent": "img/ph-regent.webp?v=a90b126e", "ph-sterling": "img/ph-sterling.webp?v=a009a0af", "ph-wave": "img/ph-wave.webp?v=b13daa5e", "women-poster": "img/women-poster.webp?v=6f24562f"};
+<script>(()=>{const v=document.getElementById('hvid');if(!v)return;
+  const small=matchMedia('(max-width:820px)').matches||(navigator.connection&&(navigator.connection.saveData||/2g/.test(navigator.connection.effectiveType||'')));
+  v.src=small?'video/runway-720.mp4':'video/runway-1080.mp4';v.preload='auto';
+  const go=()=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})};
+  v.addEventListener('playing',()=>{v.previousElementSibling&&(v.previousElementSibling.style.opacity=0)},{once:true});
+  if('IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?go():v.pause()),{threshold:.2}).observe(v);else go();
+})();
+
+const A={"blossom": "img/blossom.webp?v=34d3451b", "dt-bloom": "img/dt-bloom.webp?v=a482db41", "dt-doxa": "img/dt-doxa.webp?v=b55b7f0e", "dt-esther": "img/dt-esther.webp?v=657341b9", "dt-monarch": "img/dt-monarch.webp?v=26121059", "dt-palette": "img/dt-palette.webp?v=e948cd7b", "dt-regent": "img/dt-regent.webp?v=74b560ff", "dt-sterling": "img/dt-sterling.webp?v=3f79e2e7", "dt-wave": "img/dt-wave.webp?v=07986a21", "hero-monarch": "img/hero-monarch.webp?v=21c65c76", "hero-regent": "img/hero-regent.webp?v=74b560ff", "lb-cage": "img/lb-cage.webp?v=eb76b7d3", "lb-group": "img/lb-group.webp?v=dd1621d4", "lb-lilac": "img/lb-lilac.webp?v=4a7664a2", "lb-redpink": "img/lb-redpink.webp?v=4bcd90cd", "look-bloom": "img/look-bloom.webp?v=b67dfac6", "look-doxa": "img/look-doxa.webp?v=df278483", "look-lilac": "img/look-lilac.webp?v=7d8214e3", "look-monarch": "img/look-monarch.webp?v=c066a208", "look-palette": "img/look-palette.webp?v=83179417", "look-pink": "img/look-pink.webp?v=80a5e6a9", "look-regent": "img/look-regent.webp?v=62cc9b2b", "look-sterling": "img/look-sterling.webp?v=f4a94f68", "ph-bloom": "img/ph-bloom.webp?v=7d5749c8", "ph-doxa": "img/ph-doxa.webp?v=e5de78d0", "ph-esther": "img/ph-esther.webp?v=fb95168b", "ph-lilac": "img/ph-lilac.webp?v=89a54724", "ph-monarch": "img/ph-monarch.webp?v=21c65c76", "ph-palette": "img/ph-palette.webp?v=f4042a6a", "ph-pink": "img/ph-pink.webp?v=e0b42fd2", "ph-regent": "img/ph-regent.webp?v=a90b126e", "ph-sterling": "img/ph-sterling.webp?v=a009a0af", "ph-wave": "img/ph-wave.webp?v=b13daa5e", "runway-poster": "img/runway-poster.webp?v=1fe2d5d2", "women-poster": "img/women-poster.webp?v=6f24562f"};
 const small=Math.min(screen.width,innerWidth)<=820;
 const pic=k=>small&&A[k].slice(0,4)==='img/'?A[k].replace('img/','img/s/'):A[k];
 const NUM=(a,b)=>{const o=[];for(let n=a;n<=b;n+=2)o.push(String(n));return o};
