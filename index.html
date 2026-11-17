@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nations Clothing</title>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-faZPRM9aDFmA8GFarOcAvTzm9qjhQwkcdy2k18hgC3E='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://cnwiclvcgsoppobptzej.supabase.co; media-src 'self'; connect-src 'self' https://cnwiclvcgsoppobptzej.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-grUBkoWB6Bv6qi+A3uo0uqk6UMIBj9HTnHJtuis/UNc='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://cnwiclvcgsoppobptzej.supabase.co; media-src 'self'; connect-src 'self' https://cnwiclvcgsoppobptzej.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#fbf9f7">
 <meta name="description" content="Nations Clothing: unisex fashion made in Nigeria and shipped worldwide. Shop the new collection and order on WhatsApp.">
@@ -408,6 +408,12 @@ header{background:#fbf6f2;box-shadow:0 1px 0 rgba(42,23,17,.09)}
   .vh-acts{margin-top:18px}.vh-acts .btn{background:#fff;color:#2a1711}.vh-acts .btn.ghost{color:#fff;background:none}
   .vh-side,.vh-down{display:none}
 }
+.cvbar{position:absolute;z-index:4;left:0;right:0;bottom:0;display:flex;gap:6px;overflow-x:auto;padding:28px 12px 12px;scrollbar-width:none;
+  background:linear-gradient(180deg,transparent,rgba(20,10,6,.55))}
+.cvbar::-webkit-scrollbar{display:none}
+.cvbar button{flex:none;height:34px;padding:0 13px;border-radius:17px;background:rgba(251,246,242,.92);color:#2a1711;font-size:13px;white-space:nowrap;border:1px solid transparent}
+.cvbar button[aria-pressed=true]{background:#2a1711;color:#fff}
+.gal.hasbar .thumbs{bottom:62px}
 .cvtag{position:absolute;z-index:3;left:12px;top:12px;background:rgba(251,246,242,.92);color:#2a1711;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:7px 10px;pointer-events:none}
 </style>
 </head>
@@ -832,7 +838,8 @@ function drawSheet(){
     <label class="agree"><input type="checkbox" id="szok"> I have checked my measurements against the chart</label>
     <button class="btn" id="confirmAdd" disabled>${curL?`Add size ${curS}, ${curL} · ${naira(pr*curQ)}`:'Choose your length'}</button></div>`:'';
   const rawC=x.f.colours[x.colours.indexOf(curC)],cv=curTap&&rawC&&x.cp[rawC]&&x.cp[rawC].src?x.cp[rawC]:null,main=cv?src(cv.src,small):x.img;
-  $('sheet').innerHTML=`<div class="gal">${cv&&cv.preview&&curView==='full'?`<span class="cvtag wide">Colour preview · ${curC}</span>`:''}${curView==='full'?`<img class="cover ph" src="${main}" alt="${x.name}${cv?' in '+curC:''}">`:`<img class="cover" src="${x.det}" alt="Another view of ${x.name}">`}
+  const hasCv=Object.keys(x.cp||{}).length>0;
+  $('sheet').innerHTML=`<div class="gal${hasCv?' hasbar':''}">${hasCv?`<div class="cvbar" role="group" aria-label="See it in another colour">${x.colours.map(c=>`<button data-c="${c}" aria-pressed="${curTap&&c===curC}">${c}</button>`).join('')}</div>`:''}${cv&&cv.preview&&curView==='full'?`<span class="cvtag wide">Colour preview · ${curC}</span>`:''}${curView==='full'?`<img class="cover ph" src="${main}" alt="${x.name}${cv?' in '+curC:''}">`:`<img class="cover" src="${x.det}" alt="Another view of ${x.name}">`}
     <div class="thumbs"><button data-view="full" aria-pressed="${curView==='full'}" aria-label="Main photo" style="background-image:url(${main})"></button><button data-view="det" aria-pressed="${curView==='det'}" aria-label="Second photo" style="background-image:url(${x.det})"></button></div></div>
   <div class="side"><button class="x" data-close aria-label="Close"></button><h2 class="wide">${x.name}</h2><div class="price">${x.ask?'Price on request':naira(pr)}${x.big&&!x.ask?`<span class="for"> · size 20 and above ${naira(x.big)}</span>`:''}</div><p>${x.text}</p>
     ${x.for?`<div class="for">Perfect for: ${x.for}</div>`:''}
